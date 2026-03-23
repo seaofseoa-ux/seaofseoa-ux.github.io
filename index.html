@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyunga — Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- CSS Normalize — must come BEFORE styles.css -->
+  <link rel="stylesheet" href="css/normalize.css" />
+
+  <!-- Main Stylesheet — last link in <head> -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <!-- AI ASSISTED: Hero section layout and structure -->
+  <!-- =====================================================================
+       Navigation
+       ===================================================================== -->
+  <nav class="nav" aria-label="Main navigation">
+    <a href="#hero" class="nav__logo">K.</a>
+    <ul class="nav__links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- =====================================================================
+       SECTION 1 — Hero
+       ===================================================================== -->
+  <section class="hero" id="hero">
+
+    <!-- Decorative background geometry -->
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__circle hero__circle--1"></div>
+      <div class="hero__circle hero__circle--2"></div>
+    </div>
+
+    <div class="hero__content">
+      <p class="hero__eyebrow">Designer &amp; Developer</p>
+
+      <h1 class="hero__name">
+        Kyunga
+        <span>Portfolio.</span>
+      </h1>
+
+      <p class="hero__tagline">
+        Crafting thoughtful digital experiences — where design meets code.
+      </p>
+
+      <a href="#projects" class="hero__cta">View My Work</a>
+    </div>
+
+    <p class="hero__scroll" aria-hidden="true">Scroll ↓</p>
+  </section>
+
+
+  <!-- =====================================================================
+       SECTION 2 — About Me
+       ===================================================================== -->
+  <section class="about" id="about">
+
+    <!-- Text column -->
+    <div class="about__text-col">
+      <p class="about__label">About Me</p>
+      <h2 class="about__heading">Hello, I'm Kyunga.</h2>
+      <p class="about__text">
+        I'm a web developer and designer who loves turning ideas into
+        clean, purposeful digital experiences. I'm currently studying
+        Web Components at Algonquin College, exploring how animation
+        and interaction can breathe life into the web.
+      </p>
+      <p class="about__text">
+        When I'm not coding, you'll find me sketching wireframes,
+        discovering new typefaces, or obsessing over colour palettes.
+      </p>
+
+      <ul class="about__skills" aria-label="Skills">
+        <li class="about__skill-tag">HTML5</li>
+        <li class="about__skill-tag">CSS3</li>
+        <li class="about__skill-tag">JavaScript</li>
+        <li class="about__skill-tag">UX Design</li>
+        <li class="about__skill-tag">UX Research</li>
+        <li class="about__skill-tag">System Architect</li>
+        <li class="about__skill-tag">System Analysis</li>
+        <li class="about__skill-tag">Product Design</li>
+      </ul>
+    </div>
+
+    <!-- Image / placeholder column -->
+    <div class="about__image-wrap">
+      <img src="images/about.JPG" alt="profile">
+      <div class="about__placeholder" aria-hidden="true">K</div>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================================
+       SECTION 3 — Projects / Works
+       ===================================================================== -->
+  <section class="projects" id="projects">
+    <div class="container">
+
+      <div class="projects__header">
+        <div>
+          <p class="projects__label">Selected Work</p>
+          <h2 class="projects__heading">Projects.</h2>
+        </div>
+        <span class="projects__count" aria-hidden="true">03</span>
+      </div>
+
+      <ul class="projects__grid" aria-label="Project list">
+
+        <!-- Project 01 -->
+        <li class="project-card project-card--1">
+          <img src="images/reading-main-output.png" alt="brand-identtity-projt">
+          <a href="https://diagnostic-ptarmigan-d82.notion.site/Reading-Ocean-Redesigning-LMS-14805e71bef2804ea6fcf9b6bc63dec2?pvs=143" target="_blank" rel="noopener noreferrer">
+          <div class="project-card__inner">
+            <span class="project-card__num">01</span>
+            <h3 class="project-card__title">Brand Identity</h3>
+            <span class="project-card__tag">Design · Branding</span>
+          </div>
+          </a>
+        </li>
+
+        <!-- Project 02 -->
+        <li class="project-card project-card--2">
+          <img src="images/knoc-dashboard (2).png" alt="responsive-web-projt">
+          <a href="https://www.notion.so/KNOC-Digital-Transformation-Dashboard-15405e71bef280439aaae02ae1970123?source=copy_link" target="_blank" rel="noopener noreferrer">
+          <div class="project-card__inner">
+            <span class="project-card__num">02</span>
+            <h3 class="project-card__title">Responsive Website</h3>
+            <span class="project-card__tag">HTML · CSS · JS</span>
+          </div>
+        </a>
+        </li>
+
+        <!-- Project 03 -->
+        <li class="project-card project-card--3">
+          <img src="images/hanwha-solution.png" alt="system-architect-projt">
+          <a href="https://www.notion.so/Hanwha-Aerospace-ERP-Rebuilding-14805e71bef280ecbb06eb2d35df0663?source=copy_link" target="_blank" rel="noopener noreferrer">
+          <div class="project-card__inner">
+            <span class="project-card__num">03</span>
+            <h3 class="project-card__title">System Architect</h3>
+            <span class="project-card__tag">Information system</span>
+          </div>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- =====================================================================
+       SECTION 4 — Contact
+       ===================================================================== -->
+  <section class="contact" id="contact">
+    <p class="contact__label">Get In Touch</p>
+    <h2 class="contact__heading">Let's work together.</h2>
+    <p class="contact__text">
+      Have a project in mind or just want to say hi?<br />
+      My inbox is always open.
+    </p>
+
+    <a href="mailto:jang0044@algonquinlive.com" class="contact__email">
+      jang0044@algonquinlive.com
+    </a>
+
+    <ul class="contact__socials" aria-label="Social links">
+      <li><a href="#" class="contact__social-link">GitHub</a></li>
+      <li><a href="https://linkedin.com/in/seojin10" class="contact__social-link" target="_blank" rel="noopenner noreferrer">LinkedIn</a></li>
+      <li><a href="#" class="contact__social-link">Behance</a></li>
+    </ul>
+  </section>
+
+
+  <!-- =====================================================================
+       Footer
+       ===================================================================== -->
+  <footer class="footer">
+    <p>&copy; 2026 Kyunga — Designed &amp; Built with care.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,626 @@
+/* ==========================================================================
+   styles.css — Kyunga Portfolio
+   Author: Kyunga (with AI assistance — see OCN for details)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Custom Properties (Design Tokens)
+   -------------------------------------------------------------------------- */
+:root {
+  --navy:        #0f1f3d;
+  --navy-light:  #1a2f54;
+  --cream:       #f5f0e8;
+  --cream-dark:  #e8e0d0;
+  --gold:        #c9a84c;
+  --text-dark:   #0f1f3d;
+  --text-light:  #f5f0e8;
+  --text-muted:  #8a9bbf;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', Helvetica, sans-serif;
+
+  --transition-fast:   0.25s ease;
+  --transition-medium: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --spacing-xs:  0.5rem;
+  --spacing-sm:  1rem;
+  --spacing-md:  2rem;
+  --spacing-lg:  4rem;
+  --spacing-xl:  8rem;
+
+  --max-width: 1200px;
+}
+
+/* --------------------------------------------------------------------------
+   Base Styles
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--cream);
+  color: var(--text-dark);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+img {
+  /* All images are responsive */
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Typography
+   -------------------------------------------------------------------------- */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.1;
+  margin: 0;
+}
+
+h1 { font-size: clamp(3.5rem, 10vw, 8rem); }
+h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h3 { font-size: 1.4rem; }
+
+p {
+  margin: 0 0 var(--spacing-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Layout Utilities
+   -------------------------------------------------------------------------- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* --------------------------------------------------------------------------
+   Navigation
+   -------------------------------------------------------------------------- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: var(--spacing-sm) var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--cream);
+  letter-spacing: 0.15em;
+  font-weight: 300;
+}
+
+.nav__links {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.nav__links a {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream);
+
+  /* --- TRANSITION 1: nav link underline --- */
+  position: relative;
+  padding-bottom: 2px;
+  transition: opacity var(--transition-fast);
+}
+
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--cream);
+  /* --- TRANSITION 1 continued: width expands on hover --- */
+  transition: width var(--transition-medium);
+}
+
+.nav__links a:hover::after {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 1 — Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  min-height: 100vh;
+  background-color: var(--navy);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative geometric background shapes */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero__circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.hero__circle--1 {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -100px;
+  /* --- ANIMATION 1: slow rotating ring --- */
+  animation: spin-slow 30s linear infinite;
+}
+
+.hero__circle--2 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  right: 8%;
+  animation: spin-slow 20s linear infinite reverse;
+}
+
+/* --- ANIMATION 1: Keyframe definition --- */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--spacing-sm);
+  /* --- ANIMATION 2: fade + slide up on load --- */
+  animation: fade-up 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+.hero__name {
+  color: var(--cream);
+  /* translate property: slightly offset for asymmetric feel */
+  transform: translateX(-0.03em);
+  /* ANIMATION 2 continued */
+  animation: fade-up 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+.hero__name span {
+  display: block;
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero__tagline {
+  margin-top: var(--spacing-md);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  max-width: 320px;
+  animation: fade-up 1s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
+}
+
+.hero__cta {
+  margin-top: var(--spacing-md);
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  border: 1px solid var(--gold);
+  color: var(--cream);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: fade-up 1s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;
+
+  /* --- TRANSITION 2: button background fill on hover --- */
+  transition: background-color var(--transition-medium),
+              color var(--transition-medium),
+              transform var(--transition-fast);
+}
+
+.hero__cta:hover {
+  background-color: var(--gold);
+  color: var(--navy);
+  /* translate property used: subtle lift on hover */
+  transform: translateY(-3px);
+}
+
+/* --- ANIMATION 2: Keyframe definition --- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
+  writing-mode: vertical-rl;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  animation: fade-up 1s ease 1.2s both;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 2 — About Me
+   -------------------------------------------------------------------------- */
+.about {
+  padding: var(--spacing-xl) var(--spacing-md);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  align-items: center;
+}
+
+.about__label {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.about__heading {
+  color: var(--navy);
+  margin-bottom: var(--spacing-md);
+}
+
+.about__text {
+  color: #4a5568;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.about__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-md);
+}
+
+.about__skill-tag {
+  padding: 0.35rem 1rem;
+  border: 1px solid var(--navy-light);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--navy);
+  /* TRANSITION 2 continued: tag background on hover */
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast);
+}
+
+.about__skill-tag:hover {
+  background-color: var(--navy);
+  color: var(--cream);
+}
+
+.about__image-wrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background-color: var(--navy-light);
+  overflow: hidden;
+
+  .about__image-wrap img {
+    width: 100%;
+    heigh: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+}
+
+.about__image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--gold);
+  /* translate property: offset decorative border */
+  transform: translate(12px, 12px);
+  pointer-events: none;
+}
+
+.about__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  color: rgba(201, 168, 76, 0.3);
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 3 — Projects / Works
+   -------------------------------------------------------------------------- */
+.projects {
+  background-color: var(--navy);
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.projects .container {
+  max-width: var(--max-width);
+}
+
+.projects__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+}
+
+.projects__label {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--spacing-xs);
+}
+
+.projects__heading {
+  color: var(--cream);
+}
+
+.projects__count {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  color: rgba(245, 240, 232, 0.06);
+  line-height: 1;
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.project-card {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background-color: var(--navy-light);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.project-card a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+}
+
+.project-card__inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--spacing-md);
+  background: linear-gradient(to top, rgba(15, 31, 61, 0.95) 0%, transparent 60%);
+
+  /* TRANSITION 1 continued: overlay slides up on hover */
+  transform: translateY(60%);
+  transition: transform var(--transition-medium);
+}
+
+.project-card:hover .project-card__inner {
+  transform: translateY(0);
+}
+
+.project-card__num {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-bottom: var(--spacing-xs);
+}
+
+.project-card__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--cream);
+  font-weight: 300;
+  margin-bottom: var(--spacing-xs);
+}
+
+.project-card__tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Colour blocks as image placeholders */
+.project-card--1 { background-color: #1a2f54; }
+.project-card--2 { background-color: #162744; }
+.project-card--3 { background-color: #0d1b30; }
+
+/* --------------------------------------------------------------------------
+   SECTION 4 — Contact
+   -------------------------------------------------------------------------- */
+.contact {
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.contact__label {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.contact__heading {
+  color: var(--navy);
+  margin-bottom: var(--spacing-md);
+}
+
+.contact__text {
+  color: #4a5568;
+  margin-bottom: var(--spacing-lg);
+}
+
+.contact__email {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--navy);
+  display: inline-block;
+  position: relative;
+  padding-bottom: 4px;
+
+  /* TRANSITION 2 continued: underline grows */
+  transition: color var(--transition-fast);
+}
+
+.contact__email::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--navy);
+  transition: width var(--transition-medium), left var(--transition-medium);
+}
+
+.contact__email:hover {
+  color: var(--gold);
+}
+
+.contact__email:hover::after {
+  left: 0;
+  width: 100%;
+  background: var(--gold);
+}
+
+.contact__socials {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.contact__social-link {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.contact__social-link:hover {
+  color: var(--navy);
+  /* translate property: subtle lift */
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.footer {
+  background-color: var(--navy);
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--spacing-md);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive — Tablet & Mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .projects__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .about__image-wrap {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 600px) {
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .nav__links {
+    display: none;
+  }
+
+  .hero {
+    padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-lg);
+  }
+}
