@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hanwha Aerospace: Employee Health Benefit ERP — Seojin Jang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange-deep:   #7A3010;
+      --orange-mid:    #C2511A;
+      --orange-accent: #E07A2F;
+      --orange-light:  #FDF0E8;
+      --orange-pale:   #FEF8F3;
+      --ink:           #1A1A1A;
+      --ink-soft:      #3D3D3D;
+      --ink-muted:     #6B7280;
+      --rule:          #F0D9C8;
+      --white:         #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--orange-deep);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 13px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--orange-accent); }
+
+    .hero {
+      padding: 140px 48px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange-accent);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.15;
+      color: var(--orange-deep);
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--ink-soft);
+      max-width: 640px;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .meta-item {
+      padding: 20px 24px;
+      border-right: 1px solid var(--rule);
+    }
+    .meta-item:last-child { border-right: none; }
+    .meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 6px;
+    }
+    .meta-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .hero-image {
+      background: var(--orange-light);
+      padding: 60px 48px;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-image img {
+      max-width: 900px;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(122,48,16,0.12);
+    }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+    section + section { border-top: 1px solid var(--rule); }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange-accent);
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      color: var(--orange-deep);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 12px;
+      margin-top: 36px;
+    }
+    h3:first-of-type { margin-top: 0; }
+    p { color: var(--ink-soft); margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 32px;
+    }
+    .impact-card {
+      background: var(--white);
+      padding: 36px 28px;
+      text-align: center;
+    }
+    .impact-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      color: var(--orange-deep);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .impact-label {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.4;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    .col-block {
+      background: var(--orange-pale);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 28px;
+    }
+    .col-block h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange-deep);
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .col-block ul { list-style: none; padding: 0; }
+    .col-block ul li {
+      font-size: 14px;
+      color: var(--ink-soft);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.5;
+    }
+    .col-block ul li:last-child { border-bottom: none; }
+
+    .insight-block {
+      border-left: 3px solid var(--orange-accent);
+      padding: 20px 24px;
+      background: var(--orange-pale);
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+    }
+    .insight-block p {
+      font-size: 15px;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .process-steps { margin-top: 32px; }
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      background: var(--orange-deep);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .step-content h3 { margin-top: 8px; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .feature-card {
+      background: var(--orange-pale);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 28px;
+    }
+    .feature-card.full { grid-column: 1 / -1; }
+    .feature-num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange-accent);
+      margin-bottom: 10px;
+    }
+    .feature-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--orange-deep);
+      margin-bottom: 10px;
+      margin-top: 0;
+    }
+    .feature-card p { font-size: 14px; }
+
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .reflection-card {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .reflection-card .r-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .reflection-card.learned .r-label { color: var(--orange-accent); }
+    .reflection-card.different .r-label { color: #4A9168; }
+    .reflection-card p { font-size: 14px; }
+
+    .case-footer {
+      border-top: 1px solid var(--rule);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .case-footer a {
+      font-size: 14px;
+      color: var(--orange-accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .case-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 100px 24px 60px; }
+      section { padding: 60px 24px; }
+      .hero-image { padding: 40px 24px; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .reflection-grid { grid-template-columns: 1fr; }
+      .meta-grid { grid-template-columns: 1fr 1fr; }
+      .meta-item { border-bottom: 1px solid var(--rule); }
+      .case-footer { flex-direction: column; gap: 16px; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">S.</a>
+  <a class="nav-back" href="index.html#projects">← Back to Work</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Defense · Enterprise ERP · End-to-End UX</span>
+  <h1>Building an employee health benefit system from scratch — when the only source of truth was a system no one could explain</h1>
+  <p class="hero-sub">When Hanwha Aerospace consolidated three subsidiaries into one, employee health benefits needed to move into the new integrated ERP. The in-house nurse managing the existing system couldn't explain how it worked. So I logged in and reverse-engineered it myself.</p>
+  <div class="meta-grid">
+    <div class="meta-item">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">UX Research · IA · System Design · Wireframe</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Team</div>
+      <div class="meta-value">1 Head · 1 PM · 1 UX Designer · 4 Developers</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Timeline</div>
+      <div class="meta-value">9 months · Sep 2023</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Domain</div>
+      <div class="meta-value">Defense · Enterprise ERP</div>
+    </div>
+  </div>
+</div>
+
+<div class="hero-image">
+  <img src="images/hanwha-health-hero.png" alt="Hanwha Aerospace Employee Health Benefit ERP" />
+</div>
+
+<section>
+  <div class="section-eyebrow">Impact</div>
+  <h2>What this project delivered</h2>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-num">5</div>
+      <div class="impact-label">Core features designed end-to-end from scratch, with zero existing internal documentation</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">2</div>
+      <div class="impact-label">Distinct user workflows unified into one system — employees and in-house nurses</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">3</div>
+      <div class="impact-label">Subsidiaries' benefit structures reconciled into a single parameter-based eligibility logic</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">The Problem</div>
+  <h2>No documentation. No handover. Just a system nobody understood.</h2>
+  <p>As part of Hanwha Aerospace's three-subsidiary consolidation, employee health benefits needed to be brought into the new integrated ERP. The existing system — a third-party vendor solution used independently before the merger — had been managed entirely by the in-house nurse.</p>
+
+  <div class="insight-block">
+    <p><strong>The core challenge:</strong> The nurse was the only person who understood how the system worked — and she couldn't articulate it. Verbal explanations during interviews yielded almost nothing usable. There was no documentation, no handover material, and no internal knowledge base to work from.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="col-block">
+      <h4>Employee Side</h4>
+      <ul>
+        <li>No centralized way to view or request health benefits</li>
+        <li>Benefit eligibility varied by employee ID and legal regulations</li>
+        <li>Health screening eligibility determined by birth year under Korean law</li>
+        <li>Employees unaware of unclaimed benefits they were entitled to</li>
+      </ul>
+    </div>
+    <div class="col-block">
+      <h4>Nurse (Admin) Side</h4>
+      <ul>
+        <li>Managing benefits through a disconnected external system</li>
+        <li>Manual tracking of who had and hadn't applied</li>
+        <li>No automated way to notify non-applicants</li>
+        <li>Workflow logic lived entirely in one person's head</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Research & Key Decisions</div>
+  <h2>When the domain expert can't explain the domain</h2>
+
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Stakeholder interview — and why it wasn't enough</h3>
+        <p>The initial interview with the in-house nurse was the natural starting point. She was the sole owner of the existing benefit management system and the only person who understood how it operated day-to-day.</p>
+        <p>The problem: the system was a third-party vendor solution that predated the merger, and she had been using it through habit rather than explicit knowledge. Her verbal explanation of the workflow was fragmented and inconsistent. Standard interview techniques weren't going to get me what I needed.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Reverse-engineering the legacy system directly</h3>
+        <p>I asked for her login credentials and accessed the external system myself. Rather than asking someone to explain a process they couldn't articulate, I clicked through every menu, every button, every state — and mapped what I found.</p>
+        <div class="insight-block">
+          <p>This wasn't exploratory research. It was forensic reconstruction. I documented every data field, every action, every output — then cross-referenced it against the stated requirements to identify gaps and ambiguities. Anything I couldn't resolve from the system itself, I followed up on directly with a phone call.</p>
+        </div>
+        <p>This approach surfaced the actual data structure the system was built around, which couldn't have been recovered through interviews alone.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Translating legal logic into system logic</h3>
+        <p>Two of the five core features required translating Korean legal frameworks directly into parameter-based eligibility rules.</p>
+        <p>Health screening eligibility is governed by Korean law: employees are entitled to a free national health checkup every two years, determined by birth year (even years / odd years). This legal rule became the filtering parameter for the screening eligibility feature — not an internal policy, but a statutory requirement that had to be implemented exactly.</p>
+        <p>Individual benefit customization was tied to employee ID, allowing benefit entitlements to be configured at the individual level across three subsidiaries with different pre-merger benefit structures.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Developer-inclusive iteration from the start</h3>
+        <p>After completing the IA, I ran walkthroughs with developers included — not as a review step, but as a validation loop. When developers identified data that couldn't be integrated from the legacy system, those constraints fed directly back into the design. The workflow went: design → developer review → constraint identification → redesign → repeat.</p>
+        <p>This meant the final spec was buildable from day one, not aspirationally complete.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Solution</div>
+  <h2>5 core features, built from nothing</h2>
+  <p>The final system unified two previously separate workflows — employees managing their own benefits, and the nurse administering them — into a single ERP module with role-based access.</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-num">Feature 01</div>
+      <h3>Personal Data Consent</h3>
+      <p>Mandatory consent flow required before accessing any benefit features — built to satisfy legal data handling requirements for medical information across three merged entities.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">Feature 02</div>
+      <h3>Health Screening Eligibility Filter</h3>
+      <p>Parameter-based eligibility check using birth year as the determining variable, in line with Korean national health checkup law. Automatically surfaces eligible employees without manual tracking.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">Feature 03</div>
+      <h3>Individual Benefit Configuration</h3>
+      <p>Employee-ID-based benefit customization allowing the system to reflect each employee's specific entitlements — accommodating the different benefit structures that existed across the three subsidiaries before consolidation.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">Feature 04</div>
+      <h3>Non-Applicant Notification (Manual)</h3>
+      <p>Admin-triggered email notification system allowing the nurse to send reminders to employees who had not yet applied for benefits they were eligible for — replacing a fully manual tracking process.</p>
+    </div>
+    <div class="feature-card full">
+      <div class="feature-num">Feature 05</div>
+      <h3>Role-Separated UI — Employee vs. Administrator</h3>
+      <p>Two distinct interfaces built within the same system. The employee view surfaces personal benefit status, eligibility, and application flows. The administrator view (nurse) provides oversight of all employee records, application status, and notification management. Separating these eliminated the confusion of the previous single-interface system and reduced the operational knowledge required to manage benefits.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Reflection</div>
+  <h2>What I learned, and what I'd change</h2>
+
+  <div class="reflection-grid">
+    <div class="reflection-card learned">
+      <div class="r-label">What this project taught me</div>
+      <p>When the domain expert can't explain the domain, the designer has to become one temporarily. Reverse-engineering the legacy system directly — rather than waiting for someone to explain it — was the only way to recover the information the design depended on. It reinforced that research methods have to adapt to the situation, not the other way around.</p>
+    </div>
+    <div class="reflection-card different">
+      <div class="r-label">What I'd do differently</div>
+      <p>I'd document the reverse-engineering process more formally as a deliverable in itself — a system map of the legacy tool — before moving to IA. That artifact would have been useful for developer alignment earlier, and would have made the constraint-identification conversations more precise from the start.</p>
+    </div>
+  </div>
+</section>
+
+<div class="case-footer">
+  <a href="index.html#projects">← All Projects</a>
+  <a href="hanwha-chemical.html">Next: Hanwha Chemical Supply Management →</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hanwha Aerospace: Chemical Supply Management ERP — Seojin Jang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange-deep:   #7A3010;
+      --orange-mid:    #C2511A;
+      --orange-accent: #E07A2F;
+      --orange-light:  #FDF0E8;
+      --orange-pale:   #FEF8F3;
+      --ink:           #1A1A1A;
+      --ink-soft:      #3D3D3D;
+      --ink-muted:     #6B7280;
+      --rule:          #F0D9C8;
+      --white:         #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--orange-deep);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 13px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--orange-accent); }
+
+    .hero {
+      padding: 140px 48px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange-accent);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.15;
+      color: var(--orange-deep);
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--ink-soft);
+      max-width: 640px;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .meta-item {
+      padding: 20px 24px;
+      border-right: 1px solid var(--rule);
+    }
+    .meta-item:last-child { border-right: none; }
+    .meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 6px;
+    }
+    .meta-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .hero-image {
+      background: var(--orange-light);
+      padding: 60px 48px;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-image img {
+      max-width: 900px;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(122,48,16,0.12);
+    }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+    section + section { border-top: 1px solid var(--rule); }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange-accent);
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      color: var(--orange-deep);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 12px;
+      margin-top: 36px;
+    }
+    h3:first-of-type { margin-top: 0; }
+    p { color: var(--ink-soft); margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    .complexity-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 32px;
+    }
+    .complexity-card {
+      background: var(--white);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .complexity-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      color: var(--orange-deep);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .complexity-label {
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.4;
+    }
+
+    .constraint-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .constraint-card {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 24px;
+      background: var(--orange-pale);
+    }
+    .constraint-card h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange-deep);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .constraint-card p { font-size: 14px; }
+
+    .insight-block {
+      border-left: 3px solid var(--orange-accent);
+      padding: 20px 24px;
+      background: var(--orange-pale);
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+    }
+    .insight-block p {
+      font-size: 15px;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .process-steps { margin-top: 32px; }
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      background: var(--orange-deep);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .step-content h3 { margin-top: 8px; }
+
+    .signoff-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 32px 0;
+      background: var(--orange-pale);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .signoff-step {
+      flex: 1;
+      padding: 24px 16px;
+      text-align: center;
+      border-right: 1px solid var(--rule);
+      position: relative;
+    }
+    .signoff-step:last-child { border-right: none; }
+    .signoff-step-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange-accent);
+      margin-bottom: 6px;
+    }
+    .signoff-step-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--orange-deep);
+    }
+    .signoff-step-sub {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-top: 4px;
+    }
+
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .reflection-card {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .reflection-card .r-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .reflection-card.learned .r-label { color: var(--orange-accent); }
+    .reflection-card.different .r-label { color: #4A9168; }
+    .reflection-card p { font-size: 14px; }
+
+    .case-footer {
+      border-top: 1px solid var(--rule);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .case-footer a {
+      font-size: 14px;
+      color: var(--orange-accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .case-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 100px 24px 60px; }
+      section { padding: 60px 24px; }
+      .hero-image { padding: 40px 24px; }
+      .complexity-grid { grid-template-columns: 1fr 1fr; }
+      .constraint-grid { grid-template-columns: 1fr; }
+      .signoff-flow { flex-direction: column; }
+      .signoff-step { border-right: none; border-bottom: 1px solid var(--rule); }
+      .signoff-step:last-child { border-bottom: none; }
+      .reflection-grid { grid-template-columns: 1fr; }
+      .meta-grid { grid-template-columns: 1fr 1fr; }
+      .meta-item { border-bottom: 1px solid var(--rule); }
+      .case-footer { flex-direction: column; gap: 16px; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">S.</a>
+  <a class="nav-back" href="index.html#projects">← Back to Work</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Defense · Enterprise ERP · Systems Design</span>
+  <h1>Designing a chemical procurement flow where legal compliance, system constraints, and three subsidiaries all had to agree</h1>
+  <p class="hero-sub">The brief was straightforward: build a chemical supply management system. What wasn't straightforward was getting legal requirements, internal policies, three subsidiaries' workflows, three external systems, and development constraints to coexist in a single purchase flow.</p>
+  <div class="meta-grid">
+    <div class="meta-item">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">UX Research · IA · System Design · Wireframe</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Team</div>
+      <div class="meta-value">1 Head · 1 PM · 1 UX Designer · 4 Developers</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Timeline</div>
+      <div class="meta-value">9 months · Sep 2023</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Domain</div>
+      <div class="meta-value">Defense · Enterprise ERP</div>
+    </div>
+  </div>
+</div>
+
+<div class="hero-image">
+  <img src="images/hanwha-chemical-hero.png" alt="Hanwha Aerospace Chemical Supply Management ERP" />
+</div>
+
+<section>
+  <div class="section-eyebrow">Scope & Complexity</div>
+  <h2>What made this hard</h2>
+  <p>Chemical supply management sounds like a single feature. In practice, it meant reconciling every layer of the organization simultaneously — and every layer had constraints of its own.</p>
+  <div class="complexity-grid">
+    <div class="complexity-card">
+      <div class="complexity-num">3</div>
+      <div class="complexity-label">Subsidiaries with different workflows to unify</div>
+    </div>
+    <div class="complexity-card">
+      <div class="complexity-num">3</div>
+      <div class="complexity-label">External systems to integrate — SAP, ESH, Master Data</div>
+    </div>
+    <div class="complexity-card">
+      <div class="complexity-num">7</div>
+      <div class="complexity-label">GNB menus designed across the full system</div>
+    </div>
+    <div class="complexity-card">
+      <div class="complexity-num">20+</div>
+      <div class="complexity-label">Features architected end-to-end</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">The Problem</div>
+  <h2>Every stakeholder had a different version of what "compliant" meant</h2>
+  <p>The starting point was clear: chemical purchases within Hanwha Aerospace's ESH division needed a proper system. When three previously independent subsidiaries merged, their separate chemical management processes — each built around different internal policies and data structures — had to be unified.</p>
+
+  <div class="constraint-grid">
+    <div class="constraint-card">
+      <h4>Legal & Regulatory</h4>
+      <p>Chemical purchase processes are legally regulated — approval stages, required documentation, and compliance checkpoints are mandated, not optional. The flow had to be built around these requirements first.</p>
+    </div>
+    <div class="constraint-card">
+      <h4>Three Subsidiaries</h4>
+      <p>Each subsidiary had its own way of handling chemical purchases before the merger. Unifying these meant resolving conflicts between different internal policies, workflows, and data ownership conventions.</p>
+    </div>
+    <div class="constraint-card">
+      <h4>System Architecture</h4>
+      <p>Chemical code data needed to flow across SAP, ESH, and Master Data. Which system generated it, which stored it, and which distributed it — each option had different API and security constraints.</p>
+    </div>
+    <div class="constraint-card">
+      <h4>Development Constraints</h4>
+      <p>Not everything that made sense on paper was technically feasible. API integrations were restricted in places due to security policies, requiring the flow to be redesigned around what could actually be built.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Design Process</div>
+  <h2>Building the flow from the constraints outward</h2>
+
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Regulatory analysis before any design work</h3>
+        <p>Before touching IA or flows, I mapped the legal requirements governing chemical purchases. Approval stages, mandatory documentation fields (CAS numbers, MSDS attachments), and compliance checkpoints were non-negotiable — they defined the skeleton of the flow before any UX decisions were made.</p>
+        <p>Weekly card sorting sessions ran alongside this regulatory analysis to surface how each of the three subsidiaries actually handled purchases on the ground. The gap between what the law required and what people were actually doing became one of the central design tensions.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Interface flow analysis: where does the data actually live?</h3>
+        <p>Chemical code data was used across SAP, ESH, and Master Data simultaneously. Deciding where it was generated and how it moved between systems wasn't a technical decision — it was a design decision with technical implications.</p>
+        <div class="insight-block">
+          <p>Multiple scenarios were evaluated: generate in SAP and transfer via API, or generate in ESH and distribute outward. Each option hit different constraints — API restrictions, security policies, data ownership rules. The final architecture was the one that could actually be built, not the cleanest one on paper.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Iterating the process flow until all three subsidiaries could agree</h3>
+        <p>The process flow went through multiple iterations — not because the design was wrong, but because each iteration surfaced new conflicts between subsidiary workflows, legal requirements, and system constraints that couldn't be seen until the previous version was tested against them.</p>
+        <p>This was the most time-intensive part of the project. Each round of revision involved coordinating across legal, development, field teams, and system owners simultaneously.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Sign-Off: structuring the approval layer</h3>
+        <p>The approval process for chemical purchases involved multiple departments — Health, Safety, and Environment — each with their own sign-off requirement. These had been handled separately and inconsistently across the three subsidiaries.</p>
+        <p>Mapping the full purchase flow made the fragmentation visible. The solution was a sequential Sign-Off structure: each department signs in order, with an automated alert triggering the next signatory immediately upon completion. This reduced waiting time between approvals and prevented steps from being missed.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="signoff-flow">
+    <div class="signoff-step">
+      <div class="signoff-step-num">Step 01</div>
+      <div class="signoff-step-label">Health</div>
+      <div class="signoff-step-sub">Sign + Alert</div>
+    </div>
+    <div class="signoff-step">
+      <div class="signoff-step-num">Step 02</div>
+      <div class="signoff-step-label">Safety</div>
+      <div class="signoff-step-sub">Sign + Alert</div>
+    </div>
+    <div class="signoff-step">
+      <div class="signoff-step-num">Step 03</div>
+      <div class="signoff-step-label">Environment</div>
+      <div class="signoff-step-sub">Sign + Alert</div>
+    </div>
+    <div class="signoff-step">
+      <div class="signoff-step-num">Step 04</div>
+      <div class="signoff-step-label">ESH Final Approval</div>
+      <div class="signoff-step-sub">Complete</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Reflection</div>
+  <h2>What I learned, and what I'd change</h2>
+
+  <div class="reflection-grid">
+    <div class="reflection-card learned">
+      <div class="r-label">What this project taught me</div>
+      <p>In highly regulated enterprise environments, the design work is mostly negotiation — between what the law requires, what the organization wants, and what can actually be built. The UX output is almost secondary to the process of getting all those constraints into the same room and finding where they can coexist. Flow design here was as much about alignment as it was about usability.</p>
+    </div>
+    <div class="reflection-card different">
+      <div class="r-label">What I'd do differently</div>
+      <p>I'd map the system architecture constraints earlier — ideally before starting the process flow. Discovering API and security limitations mid-iteration forced redesigns that could have been avoided. Getting developers and system owners into the same conversation as legal and field teams from the start would have compressed the iteration cycle significantly.</p>
+    </div>
+  </div>
+</section>
+
+<div class="case-footer">
+  <a href="hanwha-health.html">← Hanwha: Health Benefit ERP</a>
+  <a href="lms.html">Next: Reading Ocean LMS →</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reading Ocean: Redesigning LMS — Seojin Jang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple-deep:   #2D1B69;
+      --purple-mid:    #4C3394;
+      --purple-accent: #7C5CBF;
+      --purple-light:  #EDE8F7;
+      --purple-pale:   #F7F5FC;
+      --ink:           #1A1A1A;
+      --ink-soft:      #3D3D3D;
+      --ink-muted:     #6B7280;
+      --rule:          #DDD6F0;
+      --white:         #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--purple-deep);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 13px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--purple-accent); }
+
+    .hero {
+      padding: 140px 48px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple-accent);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.15;
+      color: var(--purple-deep);
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--ink-soft);
+      max-width: 640px;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .meta-item {
+      padding: 20px 24px;
+      border-right: 1px solid var(--rule);
+    }
+    .meta-item:last-child { border-right: none; }
+    .meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 6px;
+    }
+    .meta-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .hero-image {
+      background: var(--purple-light);
+      padding: 60px 48px;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-image img {
+      max-width: 900px;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(45,27,105,0.12);
+    }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+    section + section { border-top: 1px solid var(--rule); }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple-accent);
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      color: var(--purple-deep);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 12px;
+      margin-top: 36px;
+    }
+    h3:first-of-type { margin-top: 0; }
+    p { color: var(--ink-soft); margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 32px;
+    }
+    .impact-card {
+      background: var(--white);
+      padding: 36px 28px;
+      text-align: center;
+    }
+    .impact-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      color: var(--purple-deep);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .impact-label {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.4;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    .col-block {
+      background: var(--purple-pale);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 28px;
+    }
+    .col-block h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--purple-deep);
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .col-block ul { list-style: none; padding: 0; }
+    .col-block ul li {
+      font-size: 14px;
+      color: var(--ink-soft);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.5;
+    }
+    .col-block ul li:last-child { border-bottom: none; }
+
+    .insight-block {
+      border-left: 3px solid var(--purple-accent);
+      padding: 20px 24px;
+      background: var(--purple-pale);
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+    }
+    .insight-block p {
+      font-size: 15px;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .process-steps { margin-top: 32px; }
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      background: var(--purple-deep);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .step-content h3 { margin-top: 8px; }
+
+    .solution-block {
+      background: var(--purple-pale);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 36px;
+      margin: 24px 0;
+    }
+    .solution-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple-accent);
+      margin-bottom: 12px;
+    }
+    .solution-block h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--purple-deep);
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+    .result-pill {
+      display: inline-block;
+      background: var(--purple-deep);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 12px;
+    }
+
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .reflection-card {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .reflection-card .r-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .reflection-card.learned .r-label { color: var(--purple-accent); }
+    .reflection-card.different .r-label { color: #E07A2F; }
+    .reflection-card p { font-size: 14px; }
+
+    .case-footer {
+      border-top: 1px solid var(--rule);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .case-footer a {
+      font-size: 14px;
+      color: var(--purple-accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .case-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 100px 24px 60px; }
+      section { padding: 60px 24px; }
+      .hero-image { padding: 40px 24px; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .reflection-grid { grid-template-columns: 1fr; }
+      .meta-grid { grid-template-columns: 1fr 1fr; }
+      .meta-item { border-bottom: 1px solid var(--rule); }
+      .case-footer { flex-direction: column; gap: 16px; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">S.</a>
+  <a class="nav-back" href="index.html#projects">← Back to Work</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">EdTech · SaaS B2B2C · LMS Redesign</span>
+  <h1>When a product expands to a new user group, the existing interface breaks — and the data proves it</h1>
+  <p class="hero-sub">Reading Ocean was a B2B reading platform for students. When it expanded to private academies, a new user group appeared: instructors. The existing system had no concept of them. CS inquiry rates and satisfaction data made the problem impossible to ignore.</p>
+  <div class="meta-grid">
+    <div class="meta-item">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">UX Research · Data-Driven Design · Prototyping · Redesign</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Team</div>
+      <div class="meta-value">3 UX Designers · 1 Graphic Designer · 3 Developers · 6 Content Creators</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Timeline</div>
+      <div class="meta-value">14 months · Nov 2021</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Domain</div>
+      <div class="meta-value">EdTech · SaaS</div>
+    </div>
+  </div>
+</div>
+
+<div class="hero-image">
+  <img src="images/lms-hero.png" alt="Reading Ocean LMS Redesign" />
+</div>
+
+<section>
+  <div class="section-eyebrow">Impact</div>
+  <h2>What changed after the redesign</h2>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-num">6%→0</div>
+      <div class="impact-label">Monthly UI-related CS inquiries eliminated after instructor/student UI separation</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">150%</div>
+      <div class="impact-label">Increase in positive user responses after redesign</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">28%</div>
+      <div class="impact-label">Improvement in the information section of the user satisfaction survey</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">The Problem</div>
+  <h2>The same interface, serving two completely different users</h2>
+  <p>Before the B2B2C expansion, Reading Ocean had one user type: students. The platform was built entirely around them. When private academies joined, instructors became primary users — but the system still only knew how to be a student platform.</p>
+
+  <div class="insight-block">
+    <p><strong>The core issue:</strong> The admin interface and the student interface were identical — 100% the same layout, navigation, and visual identity. Instructors were landing in a student-facing interface and trying to do administrative work. The confusion was structural, not a usability edge case.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="col-block">
+      <h4>UI Confusion</h4>
+      <ul>
+        <li>Admin and student landing pages looked identical</li>
+        <li>Over 80% of surveyed instructors reported difficulty using the service</li>
+        <li>Most common CS inquiry: "Why isn't this working?" — from instructors in the student interface</li>
+        <li>No visual or navigational distinction between roles</li>
+      </ul>
+    </div>
+    <div class="col-block">
+      <h4>Tracking Gap</h4>
+      <ul>
+        <li>No way for instructors to track individual student progress systematically</li>
+        <li>Existing reports relied on simple bar graphs with no comparative data</li>
+        <li>43.8% of surveyed users identified report features as their top need</li>
+        <li>Instructors couldn't use the platform effectively in parent consultations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Research & Key Decisions</div>
+  <h2>Using the data the company already had</h2>
+
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>CS inquiry data as the starting point</h3>
+        <p>Rather than starting with exploratory research, I began by analyzing existing CS inquiry logs. The data showed a consistent pattern: 6% of monthly inquiries were UI-related, and the vast majority came from instructors confused about which interface they were in.</p>
+        <p>This gave the problem a measurable baseline before any design work began — and made the business case for the redesign concrete.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Quantitative survey to scope the report feature</h3>
+        <p>A two-week survey targeting academy instructors and power users surfaced that 43.8% of respondents identified the lack of a proper progress tracking report as their primary pain point. This directed where the design effort should go beyond the UI separation.</p>
+        <p>The survey also revealed that dissatisfaction with reports stemmed specifically from the lack of comparative data — not just the absence of graphs, but the inability to see one student's performance in context.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>In-depth interviews to understand the tracking need</h3>
+        <p>Following the survey, in-depth interviews were conducted with instructors who had flagged UI concerns. The Mom Test principle guided the question design — eliminating solution bias to get at real workflow friction rather than feature requests.</p>
+        <p>The interviews confirmed the survey finding and added texture: instructors needed to talk about student progress with parents. The existing reports couldn't support that conversation.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>SWOT analysis: finding data the platform uniquely owned</h3>
+        <p>An internal SWOT analysis identified that Reading Ocean possessed unusually detailed learning data — reading comprehension broken down by critical, literal, and creative skill dimensions. This data existed but wasn't being surfaced to instructors in any meaningful way.</p>
+        <div class="insight-block">
+          <p>This led to the decision to create the C.R. Rate (Careful Reading Rate) — a proprietary metric derived from the platform's exclusive data. Instead of generic scores, instructors could now see a measure that competitors couldn't replicate, directly addressing the demand for comparative performance data.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>A/B testing the UI separation</h3>
+        <p>Three rounds of A/B testing were run on the redesigned landing pages. The tests focused on whether instructors could immediately identify which interface they were in, and whether the navigational structure reduced time-to-task for administrative functions.</p>
+        <p>The results were clear. Role-specific visual identity and navigation eliminated the ambiguity that had been generating CS inquiries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Solution</div>
+  <h2>Two problems, two solutions, both measured</h2>
+
+  <div class="solution-block">
+    <div class="solution-tag">Solution 01 — UI Separation</div>
+    <h3>Role-specific landing pages for instructors and students</h3>
+    <p>The instructor and student interfaces were fully redesigned as distinct experiences — different visual identity, different navigation structure, different information hierarchy. The goal wasn't aesthetic differentiation; it was making role confusion structurally impossible.</p>
+    <p>Instructors received a landing page organized around administrative functions: class management, student oversight, and reporting. Students retained a learning-focused interface. The two no longer shared any navigational ambiguity.</p>
+    <div class="result-pill">CS inquiries: 6% → 0% · Positive responses: +150%</div>
+  </div>
+
+  <div class="solution-block">
+    <div class="solution-tag">Solution 02 — Progress Tracking & C.R. Rate</div>
+    <h3>Personalized reports built around data the platform uniquely owned</h3>
+    <p>The redesigned progress reports replaced generic bar graphs with visualizations built around the platform's proprietary reading skill data. The C.R. Rate gave instructors a comparative metric — "My C.R. Rate" vs "Average C.R. Rate" — that directly addressed the demand for benchmarking data surfaced in the survey.</p>
+    <p>Reports became detailed enough to support parent consultations, which had been identified as a key instructor use case in the interviews. The frequency of performance sharing with parents increased more than twofold after the redesign.</p>
+    <div class="result-pill">Satisfaction survey information score: +28%</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Reflection</div>
+  <h2>What I learned, and what I'd change</h2>
+
+  <div class="reflection-grid">
+    <div class="reflection-card learned">
+      <div class="r-label">What this project taught me</div>
+      <p>The most useful research in this project was data the company already had. CS logs and satisfaction surveys gave a measurable baseline that exploratory research alone couldn't have provided. Starting with existing data — and designing to move specific numbers — made the impact of the work legible in a way that's rarely possible in greenfield projects.</p>
+    </div>
+    <div class="reflection-card different">
+      <div class="r-label">What I'd do differently</div>
+      <p>The C.R. Rate was a strong insight, but it was developed after the survey phase. I'd build the SWOT analysis into the research process earlier — looking at what data assets the platform owned before scoping the feature set. The proprietary metric could have been identified as a differentiator from the start, rather than emerging mid-project.</p>
+    </div>
+  </div>
+</section>
+
+<div class="case-footer">
+  <a href="hanwha-chemical.html">← Hanwha: Chemical Supply Management</a>
+  <a href="index.html#projects">All Projects →</a>
+</div>
+
+</body>
+</html>
