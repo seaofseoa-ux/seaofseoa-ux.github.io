@@ -500,17 +500,30 @@ Due to organizational UX maturity and the mid-fidelity handoff structure, post-l
   <div class="section-eyebrow">Research & Key Decisions</div>
   <h2>How I decided what to build</h2>
 
-  <div class="process-steps">
+ <div class="process-steps">
+    
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-content">
         <h3>4 weeks of targeted interviews — not generic discovery</h3>
         <p>Weekly Zoom sessions with 25 participants: 20 users from 9 branch offices, 5 from headquarters. Sessions were structured to surface real workflow friction, not wish lists. Photos from on-site sessions at branch offices provided context that remote interviews couldn't.</p>
         <p>The initial findings were common DT complaints — not particularly useful on their own.</p>
-        <div style="margin: 16px 0; text-align: left;">
-        <img src="images/week1.png" alt="In-person Interview" style="width: 100%; max-width: 500px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
-        <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: left;">In-person interview & analysis</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; max-width: 600px;">
+          <div style="text-align: left;">
+            <img src="images/week1.png" alt="Week 1 Research" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          </div>
+          <div style="text-align: left;">
+            <img src="images/week2.png" alt="Week 2 Research" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          </div>
+          <div style="text-align: left;">
+            <img src="images/week3.png" alt="Week 3 Research" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          </div>
+          <div style="text-align: left;">
+            <img src="images/week4.png" alt="Week 4 Research" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          </div>
         </div>
+        <p style="font-size: 13px; color: #666; margin-top: -4px; text-align: left;">4 weeks of targeted user interview sessions</p>
       </div>
     </div>
 
@@ -520,9 +533,10 @@ Due to organizational UX maturity and the mid-fidelity handoff structure, post-l
         <h3>Affinity Diagram: redefining who the users actually were</h3>
         <p>Running an Affinity Diagram on the raw interview data produced an unexpected result. When treated as one user group, the data was noisy. When separated into HQ and branch perspectives, two distinct problem spaces emerged with different root causes and different success criteria.</p>
         <p>This led to a deliberate decision: build one product with two modes, not one product trying to serve everyone the same way.</p>
+        
         <div style="margin: 16px 0; text-align: left;">
-        <img src="images/temp_1731625250037.-275662214 1.png" alt="In-person Interview" style="width: 100%; max-width: 500px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
-        <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: left;">In-person interview & analysis</p>
+          <img src="images/affinity-diagram.png" alt="Affinity Diagram Analysis" style="width: 100%; max-width: 500px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: left;">Affinity diagram user group synthesis</p>
         </div>
       </div>
     </div>
@@ -533,10 +547,12 @@ Due to organizational UX maturity and the mid-fidelity handoff structure, post-l
         <h3>Competitive audit before wireframing</h3>
         <p>Before designing anything, I audited dashboard patterns from competitors in centralized control systems. The goal was to understand what made enterprise dashboards scannable under real work conditions — not just aesthetically clean.</p>
         <p>Key finding: information hierarchy mattered more than information density. Users found it easier to process data when the most critical indicator was centered, not buried.</p>
-        <div style="margin: 16px 0; text-align: left;">
-        <img src="images/hq-low-fi-choiced.png" alt="In-person Interview" style="width: 100%; max-width: 500px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
-        <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: left;">In-person interview & analysis</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; max-width: 600px;">
+          <img src="images/concept-testing-a.png" alt="Competitive Audit A" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <img src="images/concept-testing-b.png" alt="Competitive Audit B" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
         </div>
+        <p style="font-size: 13px; color: #666; margin-top: -4px; text-align: left;">Dashboard pattern and scanning hierarchy analysis</p>
       </div>
     </div>
 
@@ -547,9 +563,10 @@ Due to organizational UX maturity and the mid-fidelity handoff structure, post-l
         <p>For the branch dashboard, the challenge wasn't visualization style — it was deciding what to visualize. Each of the 10 safety management menus had different operational logic. I analyzed the core attributes of each menu to determine which data points were genuinely actionable vs. informational.</p>
         <div class="insight-block">
           <p>Example: "Contractor Management" needed a purchase count. "Risk Index Overview" needed risk scores plus conditions. The graph type followed from the data type — not the other way around.</p>
+          
           <div style="margin: 16px 0; text-align: left;">
-        <img src="images/menu attribution.jpg" alt="graph data" style="width: 100%; max-width: 500px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
-        <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: left;">In-person interview & analysis</p>
+            <img src="images/graph-data-metrics.jpg" alt="Graph Data Metrics Analysis" style="width: 100%; max-width: 500px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+            <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: left;">Data attribute matching and graph mapping matrix</p>
           </div>
         </div>
       </div>
@@ -560,12 +577,14 @@ Due to organizational UX maturity and the mid-fidelity handoff structure, post-l
       <div class="step-content">
         <h3>Concept testing with all 9 branches</h3>
         <p>The most significant finding from branch concept testing: graph effectiveness varied sharply by task relevance. The same visualization that worked well for one team's workflow was irrelevant for another's. This validated the need for personalized, task-specific dashboard configurations — not a one-size-fits-all layout.</p>
+        
         <div style="margin: 16px 0; text-align: left;">
-        <img src="images/hq-low-fi.png" alt="hq dashboard concept testing" style="width: 100%; max-width: 500px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
-        <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: left;">In-person interview & analysis</p>
+          <img src="images/concept-testing.jpg" alt="Concept Testing" style="width: 100%; max-width: 500px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: left;">Remote branch validation and layout feedback</p>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
