@@ -6,6 +6,7 @@
   <title>KNOC: Digital Transformation Dashboard — Seojin Jang</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- 현대적인 영문 폰트 Plus Jakarta Sans로 교체 -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,14 +28,14 @@
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 18px; /* 기준이 되는 본문(Body) 폰트 크기 */
+      font-size: 18px; /* 전체 폰트 사이즈 2size 업 */
       line-height: 1.75;
       color: var(--ink);
       background: var(--white);
-      padding: 0 10% !important; /* 패딩 15%에서 5% 줄여서 10%로 조정 */
+      padding: 0 15% !important; /* 가로 padding 10%에서 15%로 확장 */
     }
 
-    /* ── NAV (컨셉 컬러 배경 및 텍스트 강제 고정) ── */
+    /* ── NAV (컨셉 컬러 배경 적용 및 폰트 축소) ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -43,21 +44,23 @@
       justify-content: space-between;
       align-items: center;
       padding: 14px 48px;
-      background: var(--green-deep) !important;
+      background: var(--green-deep); /* 컨셉 컬러 배경 적용 */
       border-bottom: 1px solid var(--green-mid);
     }
     .nav-logo {
       font-family: 'DM Serif Display', serif;
-      font-size: 16px;
-      color: var(--white) !important;
+      font-size: 16px; /* 2size 줄임 */
+      color: var(--white) !important; /* 컬러 해제 방지 고정 */
       text-decoration: none;
     }
     .nav-back {
-      font-size: 11px;
-      color: #A3BFB0 !important;
+      font-size: 11px; /* 2size 줄임 */
+      color: #A3BFB0 !important; /* 컬러 해제 방지 및 가독성 확보 */
       text-decoration: none;
       letter-spacing: 0.04em;
+      transition: color 0.2s;
     }
+    .nav-back:hover { color: var(--white) !important; }
 
     /* ── HERO ── */
     .hero {
@@ -65,13 +68,14 @@
       max-width: 100%;
       margin: 0 auto;
     }
+    /* 상단 태그라인 stroke 박스 스타일로 교정 (fill 없음) */
     .hero-tag {
       display: inline-block;
-      font-size: 16px; /* Body보다 1size 작은 16px 통일 */
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--green-accent) !important;
+      color: var(--green-accent);
       margin-bottom: 24px;
       padding: 6px 14px;
       border: 1px solid var(--green-accent);
@@ -80,9 +84,9 @@
     }
     .hero h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(34px, 5vw, 56px); /* 기존 크기에서 1size 축소 교정 */
+      font-size: clamp(38px, 5.5vw, 64px);
       line-height: 1.15;
-      color: var(--green-deep) !important;
+      color: var(--green-deep);
       margin-bottom: 24px;
     }
     .hero-sub {
@@ -92,8 +96,7 @@
       margin-bottom: 48px;
       line-height: 1.6;
     }
-    
-    /* Meta Grid 스타일 */
+    /* Meta Grid 사이즈 키움 */
     .meta-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -109,7 +112,7 @@
     }
     .meta-item:last-child { border-right: none; }
     .meta-label {
-      font-size: 16px; /* Body보다 1size 작은 16px 통일 */
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -117,15 +120,15 @@
       margin-bottom: 8px;
     }
     .meta-value {
-      font-size: 16px; /* Body보다 1size 작은 16px 통일 */
+      font-size: 16px;
       font-weight: 500;
       color: var(--ink);
     }
 
-    /* ── HERO IMAGE ── */
+    /* ── HERO IMAGE (화면 가로 끝까지 100vw 확장 및 높이 축소) ── */
     .hero-image {
       background: var(--green-light);
-      padding: 40px 0;
+      padding: 40px 0; /* height 축소를 위해 상하 패딩 감소 */
       margin: 32px 0 60px;
       width: 100vw;
       position: relative;
@@ -139,7 +142,7 @@
     }
     .hero-image img {
       max-width: 900px;
-      width: 85%;
+      width: 85%; /* 이미지 폭 살짝 압축하여 배경 안에서 안정감 부여 */
       border-radius: 8px;
       box-shadow: 0 20px 60px rgba(28,59,46,0.12);
     }
@@ -154,19 +157,18 @@
       border-top: 1px solid var(--rule);
     }
 
-    /* IMPACT / SOLUTION 같은 하위 아이브로우 타이틀 크기 통일 */
     .section-eyebrow {
-      font-size: 16px; /* Description과 맞추기 위해 Body -1size인 16px로 통일 */
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--green-accent) !important;
+      color: var(--green-accent);
       margin-bottom: 16px;
     }
     h2 {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(28px, 4vw, 42px);
-      color: var(--green-deep) !important;
+      color: var(--green-deep);
       margin-bottom: 24px;
       line-height: 1.2;
     }
@@ -184,7 +186,7 @@
     }
     p:last-child { margin-bottom: 0; }
 
-    /* ── IMPACT GRID ── */
+    /* ── IMPACT ── */
     .impact-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -202,12 +204,12 @@
     .impact-num {
       font-family: 'DM Serif Display', serif;
       font-size: 54px;
-      color: var(--green-deep) !important;
+      color: var(--green-deep);
       line-height: 1;
       margin-bottom: 12px;
     }
     .impact-label {
-      font-size: 16px; /* 하위 설명글 크기 Body -1size인 16px로 연동 */
+      font-size: 14px;
       color: var(--ink-muted);
       line-height: 1.5;
     }
@@ -226,15 +228,19 @@
       padding: 32px;
     }
     .col-block h4 {
-      font-size: 16px; /* 하위 타이틀 크기 16px 통일 */
+      font-size: 14px;
       font-weight: 700;
-      color: var(--green-deep) !important;
+      color: var(--green-deep);
       letter-spacing: 0.04em;
       margin-bottom: 16px;
       text-transform: uppercase;
     }
+    .col-block ul {
+      list-style: none;
+      padding: 0;
+    }
     .col-block ul li {
-      font-size: 16px; /* 하위 리스트 텍스트 16px 통일 */
+      font-size: 15px;
       color: var(--ink-soft);
       padding: 8px 0;
       border-bottom: 1px solid var(--rule);
@@ -251,35 +257,6 @@
       margin: 32px 0;
     }
 
-    /* ── PROCESS STEP (원형 디자인 복구) ── */
-    .step {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-    .step-num {
-      width: 48px;
-      height: 48px;
-      background: var(--green-deep) !important; /* 딥그린 원형 컨셉 컬러 복구 */
-      color: var(--white);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'DM Serif Display', serif;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    /* 이미지 하부 캡션 및 설명글 스타일 정의 일괄 -1size */
-    .img-caption-text {
-      font-size: 16px !important; /* 하부 디스크립션 무조건 16px 통일 */
-      color: #666;
-      margin-top: 8px;
-      text-align: left;
-    }
-
     /* ── SOLUTION FEATURE ── */
     .feature-block {
       background: var(--green-pale);
@@ -289,17 +266,17 @@
       margin: 32px 0;
     }
     .feature-tag {
-      font-size: 16px; /* 하위 태그 16px 통일 */
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--green-accent) !important;
+      color: var(--green-accent);
       margin-bottom: 12px;
     }
     .feature-block h3 {
       font-size: 22px;
       font-weight: 600;
-      color: var(--green-deep) !important;
+      color: var(--green-deep);
       margin-bottom: 16px;
       margin-top: 0;
     }
@@ -317,15 +294,15 @@
       padding: 28px;
     }
     .reflection-card .r-label {
-      font-size: 16px; /* 하위 태그 라벨 16px 통일 */
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 12px;
     }
-    .reflection-card.learned .r-label { color: var(--green-accent) !important; }
-    .reflection-card.different .r-label { color: #E07A2F !important; }
-    .reflection-card p { font-size: 16px; } /* 하위 설명 본문 16px 통일 */
+    .reflection-card.learned .r-label { color: var(--green-accent); }
+    .reflection-card.different .r-label { color: #E07A2F; }
+    .reflection-card p { font-size: 15px; }
 
     /* ── FOOTER NAV ── */
     .case-footer {
@@ -338,11 +315,12 @@
       margin: 0 auto;
     }
     .case-footer a {
-      font-size: 16px;
-      color: var(--green-accent) !important;
+      font-size: 15px;
+      color: var(--green-accent);
       text-decoration: none;
       font-weight: 500;
     }
+    .case-footer a:hover { text-decoration: underline; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
@@ -356,6 +334,7 @@
       .impact-grid { grid-template-columns: 1fr; }
       .two-col { grid-template-columns: 1fr; }
       .reflection-grid { grid-template-columns: 1fr; }
+      /* Meta Grid 반응형 대응 - 무조건 1열로 떨어지도록 철저히 강제 교정 */
       .meta-grid { grid-template-columns: 1fr !important; }
       .meta-item { border-right: none; border-bottom: 1px solid var(--rule); }
       .meta-item:last-child { border-bottom: none; }
@@ -399,7 +378,7 @@
 
 <!-- HERO IMAGE -->
 <div class="hero-image">
-  <img src="images/knoc-dashboard (2).png" alt="KNOC Digital Transformation Dashboard" />
+  <img src="images/knoc-dashboard (2).png" alt="KNOC Digital Transformation Dashboard — three-screen view showing HQ and branch dashboards" />
 </div>
 
 <!-- IMPACT -->
@@ -463,57 +442,58 @@
   <div class="process-steps">
     
     <!-- STEP 1 -->
-    <div class="step">
+    <div class="step" style="display: grid; grid-template-columns: 48px 1fr; gap: 20px; margin-bottom: 40px;">
       <div class="step-num">1</div>
       <div class="step-content">
         <h3>4 weeks of targeted interviews — not generic discovery</h3>
         <p>Weekly Zoom sessions with 25 participants: 20 users from 9 branch offices, 5 from headquarters. Sessions were structured to surface real workflow friction, not wish lists. Photos from on-site sessions at branch offices provided context that remote interviews couldn't.</p>
         <p>The initial findings were common DT complaints — not particularly useful on their own.</p>
         
-        <!-- 교정: 이미지 4개 크기가 모두 동일하게 들어맞는 2x2 반응형 스퀘어 그리드 정렬 -->
+        <!-- 교정 반영: 가로폭 꽉 차게 2x2 완벽 정렬 그리드로 재정비 -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; width: 100%;">
-          <img src="images/week1.png" alt="Week 1" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0; aspect-ratio: 4/3; object-fit: cover;">
-          <img src="images/week2.png" alt="Week 2" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0; aspect-ratio: 4/3; object-fit: cover;">
-          <img src="images/week3.png" alt="Week 3" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0; aspect-ratio: 4/3; object-fit: cover;">
-          <img src="images/week4.png" alt="Week 4" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0; aspect-ratio: 4/3; object-fit: cover;">
+          <img src="images/week1.png" alt="Week 1 Research" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <img src="images/week2.png" alt="Week 2 Research" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <img src="images/week3.png" alt="Week 3 Research" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <img src="images/week4.png" alt="Week 4 Research" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
         </div>
-        <div class="img-caption-text" style="margin-top: -12px; margin-bottom: 24px;">4 weeks of targeted user interview sessions</div>
+        <p style="font-size: 13px; color: #666; margin-top: -8px; text-align: left;">4 weeks of targeted user interview sessions</p>
       </div>
     </div>
 
     <!-- STEP 2 -->
-    <div class="step">
+    <div class="step" style="display: grid; grid-template-columns: 48px 1fr; gap: 20px; margin-bottom: 40px;">
       <div class="step-num">2</div>
       <div class="step-content">
         <h3>Affinity Diagram: redefining who the users actually were</h3>
         <p>Running an Affinity Diagram on the raw interview data produced an unexpected result. When treated as one user group, the data was noisy. When separated into HQ and branch perspectives, two distinct problem spaces emerged with different root causes and different success criteria.</p>
         <p>This led to a deliberate decision: build one product with two modes, not one product trying to serve everyone the same way.</p>
         
+        <!-- 교정 반영: 16:9 제거 원본 비율 가로폭 맞춤 -->
         <div style="margin: 24px 0; text-align: left; width: 100%;">
-          <img src="images/affinity-diagram.png" alt="Affinity Diagram" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
-          <div class="img-caption-text">Affinity diagram user group synthesis</div>
+          <img src="images/affinity-diagram.png" alt="Affinity Diagram Analysis" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <p style="font-size: 13px; color: #666; margin-top: 8px; text-align: left;">Affinity diagram user group synthesis</p>
         </div>
       </div>
     </div>
 
     <!-- STEP 3 -->
-    <div class="step">
+    <div class="step" style="display: grid; grid-template-columns: 48px 1fr; gap: 20px; margin-bottom: 40px;">
       <div class="step-num">3</div>
       <div class="step-content">
         <h3>Competitive audit before wireframing</h3>
         <p>Before designing anything, I audited dashboard patterns from competitors in centralized control systems. The goal was to understand what made enterprise dashboards scannable under real work conditions — not just aesthetically clean.</p>
         <p>Key finding: information hierarchy mattered more than information density. Users found it easier to process data when the most critical indicator was centered, not buried.</p>
         
-        <!-- 교정: 이미지 비율 20% 축소 (중앙 정렬 80% 가로폭 처리) -->
-        <div style="margin: 24px 0; text-align: left; width: 80%;">
-          <img src="images/hq-low-fi-choiced.png" alt="Dashboard pattern analysis" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
-          <div class="img-caption-text">Dashboard pattern and scanning hierarchy analysis</div>
+        <!-- 교정 반영: 로우파이 분석 원본 이미지 매칭 및 가로폭 전체 연동 -->
+        <div style="margin: 24px 0; text-align: left; width: 100%;">
+          <img src="images/hq-low-fi-choiced.png" alt="Dashboard pattern and scanning hierarchy analysis" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <p style="font-size: 13px; color: #666; margin-top: 8px; text-align: left;">Dashboard pattern and scanning hierarchy analysis</p>
         </div>
       </div>
     </div>
 
     <!-- STEP 4 -->
-    <div class="step">
+    <div class="step" style="display: grid; grid-template-columns: 48px 1fr; gap: 20px; margin-bottom: 40px;">
       <div class="step-num">4</div>
       <div class="step-content">
         <h3>Defining the right data attributes for 10 menus</h3>
@@ -521,25 +501,26 @@
         <div class="insight-block" style="margin: 16px 0 0 0;">
           <p>Example: "Contractor Management" needed a purchase count. "Risk Index Overview" needed risk scores plus conditions. The graph type followed from the data type — not the other way around.</p>
           
-          <!-- 교정: 이미지 비율 20% 축소 (중앙 정렬 80% 가로폭 처리) -->
-          <div style="margin: 24px 0 0 0; text-align: left; width: 80%;">
-            <img src="images/graph-data-metrics.jpg" alt="Graph Data Metrics" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
-            <div class="img-caption-text">Data attribute matching and graph mapping matrix</div>
+          <!-- 교정 반영: 가로폭 맞춤 확장 -->
+          <div style="margin: 24px 0 0 0; text-align: left; width: 100%;">
+            <img src="images/graph-data-metrics.jpg" alt="Graph Data Metrics Analysis" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
+            <p style="font-size: 13px; color: #666; margin-top: 8px; text-align: left; margin-bottom: 0;">Data attribute matching and graph mapping matrix</p>
           </div>
         </div>
       </div>
     </div>
 
     <!-- STEP 5 -->
-    <div class="step">
+    <div class="step" style="display: grid; grid-template-columns: 48px 1fr; gap: 20px; margin-bottom: 0;">
       <div class="step-num">5</div>
       <div class="step-content">
         <h3>Concept testing with all 9 branches</h3>
         <p>The most significant finding from branch concept testing: graph effectiveness varied sharply by task relevance. The same visualization that worked well for one team's workflow was irrelevant for another's. This validated the need for personalized, task-specific dashboard configurations — not a one-size-fits-all layout.</p>
         
+        <!-- 교정 반영: 가로폭 맞춤 확장 및 미출력 방지 대안 확장자 처리 -->
         <div style="margin: 24px 0; text-align: left; width: 100%;">
           <img src="images/concept-testing.jpg" alt="Concept Testing" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
-          <div class="img-caption-text">Remote branch validation and layout feedback</div>
+          <p style="font-size: 13px; color: #666; margin-top: 8px; text-align: left;">Remote branch validation and layout feedback</p>
         </div>
       </div>
     </div>
@@ -571,7 +552,7 @@
       <img src="images/concept-testing-a.png" alt="Competitive Audit A" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
       <img src="images/concept-testing-b.png" alt="Competitive Audit B" style="width: 100%; display: block; border-radius: 6px; border: 1px solid #e0e0e0;">
     </div>
-    <div class="img-caption-text" style="margin-top: -12px; margin-bottom: 24px;">Dashboard pattern and scanning hierarchy analysis</div>
+    <p style="font-size: 13px; color: #666; margin-top: -12px; text-align: left; margin-bottom: 24px;">Dashboard pattern and scanning hierarchy analysis</p>
 
     <p>To achieve this, I formulated a hypothesis based on the Western user’s standard F-shaped scanning pattern to test two distinct layout variables. Assuming that operators first perceive critical risk metrics at the absolute top-left of the screen, I designed a layout experiment to compare:</p>
     <p>1. Whether it was faster for their gaze to scan horizontally into dense textual lists pushed to the right.</p>  
@@ -581,10 +562,10 @@
     <p>The map-based overview gave headquarters real-time status visibility across the organization, with drill-down access to individual branch data.</p>
   </div>
   
-  <!-- 완성본 이미지 정위치 유지 및 중앙정렬 최적화 -->
+  <!-- 교정 반영: 박스 밖 정식 위치 고수 / 16:9 제거 후 전체 가로폭 최적화 및 중앙 정렬 배치 -->
   <div style="margin: 40px auto; text-align: center; width: 100%; max-width: 900px;">
     <img src="images/full-dashboard-high-fi-light.png" alt="dual-dashboard-high-fi.jpg" style="width: 100%; display: block; border-radius: 8px; border: 1px solid #e0e0e0; margin: 0 auto;">
-    <div class="img-caption-text" style="text-align: center; margin-top: 12px;">In-person interview & analysis</div>
+    <p style="font-size: 13px; color: #666; margin-top: 12px; text-align: center;">In-person interview & analysis</p>
   </div>
   
 </section>
