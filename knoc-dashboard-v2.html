@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KNOC: Digital Transformation Dashboard — Seojin Jang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep:  #1C3B2E;
+      --green-mid:   #2D5F47;
+      --green-accent:#4A9168;
+      --green-light: #E8F3ED;
+      --green-pale:  #F4FAF6;
+      --ink:         #1A1A1A;
+      --ink-soft:    #3D3D3D;
+      --ink-muted:   #6B7280;
+      --rule:        #D1E8DA;
+      --white:       #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 43px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--green-deep);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 13px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--green-accent); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 126px 43px 72px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      margin-bottom: 24px;
+      padding: 6px 14px;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+    }
+    .hero h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.15;
+      color: var(--green-deep);
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--ink-soft);
+      max-width: 640px;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .meta-item {
+      padding: 18px 22px;
+      border-right: 1px solid var(--rule);
+    }
+    .meta-item:last-child { border-right: none; }
+    .meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      margin-bottom: 6px;
+    }
+    .meta-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ── HERO IMAGE ── */
+    .hero-image {
+      background: var(--green-light);
+      padding: 54px 30px;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-image img {
+      max-width: 720px;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(28,59,46,0.12);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 72px 43px;
+    }
+    section + section {
+      border-top: 1px solid var(--rule);
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      color: var(--green-deep);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 12px;
+      margin-top: 36px;
+    }
+    h3:first-of-type { margin-top: 0; }
+    p {
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── IMPACT ── */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 32px;
+    }
+    .impact-card {
+      background: var(--white);
+      padding: 32px 25px;
+      text-align: center;
+    }
+    .impact-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      color: var(--green-deep);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .impact-label {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.4;
+    }
+
+    /* ── TWO-COL ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    .col-block {
+      background: var(--green-pale);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 25px;
+    }
+    .col-block h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green-accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .col-block ul {
+      list-style: none;
+      padding: 0;
+    }
+    .col-block ul li {
+      font-size: 14px;
+      color: var(--ink-soft);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.5;
+    }
+    .col-block ul li:last-child { border-bottom: none; }
+
+    /* ── INSIGHT BLOCK ── */
+    .insight-block {
+      border-left: 3px solid var(--green-accent);
+      padding: 18px 22px;
+      background: var(--green-pale);
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+    }
+    .insight-block p {
+      font-size: 15px;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    /* ── DECISION CARD ── */
+    .decision-row {
+      display: grid;
+      grid-template-columns: 1fr 40px 1fr;
+      align-items: center;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .decision-box {
+      background: var(--green-pale);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 18px;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+    .decision-box strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      margin-bottom: 8px;
+    }
+    .decision-arrow {
+      text-align: center;
+      font-size: 20px;
+      color: var(--green-accent);
+    }
+
+    /* ── PROCESS STEP ── */
+    .process-steps {
+      margin-top: 32px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      background: var(--green-deep);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .step-content h3 {
+      margin-top: 8px;
+    }
+
+    /* ── IMAGE BLOCK ── */
+    .img-block {
+      margin: 32px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+    }
+    .img-block img {
+      width: 100%;
+      display: block;
+    }
+    .img-caption {
+      font-size: 12px;
+      color: var(--ink-muted);
+      padding: 11px 14px;
+      background: var(--green-pale);
+      text-align: center;
+    }
+
+    /* ── SOLUTION FEATURE ── */
+    .feature-block {
+      background: var(--green-pale);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 32px;
+      margin: 24px 0;
+    }
+    .feature-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      margin-bottom: 12px;
+    }
+    .feature-block h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--green-deep);
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    /* ── REFLECTION ── */
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .reflection-card {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 22px;
+    }
+    .reflection-card .r-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .reflection-card.learned .r-label { color: var(--green-accent); }
+    .reflection-card.different .r-label { color: #E07A2F; }
+    .reflection-card p { font-size: 14px; }
+
+    /* ── FOOTER NAV ── */
+    .case-footer {
+      border-top: 1px solid var(--rule);
+      padding: 43px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .case-footer a {
+      font-size: 14px;
+      color: var(--green-accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .case-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 22px; }
+      .hero { padding: 90px 22px 54px; }
+      section { padding: 54px 22px; }
+      .hero-image { padding: 36px 15px; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .decision-row { grid-template-columns: 1fr; }
+      .decision-arrow { display: none; }
+      .reflection-grid { grid-template-columns: 1fr; }
+      .meta-grid { grid-template-columns: 1fr; }
+      .meta-item { border-right: none; }
+      .meta-item { border-bottom: 1px solid var(--rule); }
+      .case-footer { flex-direction: column; gap: 16px; padding: 29px 22px; }
+      .research-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body style="padding: 0 9% !important; box-sizing: border-box;">
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">S.</a>
+  <a class="nav-back" href="index.html#projects">← Back to Work</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-tag">Public Sector · Digital Transformation · Dashboard</span>
+  <h1>Modernizing Public Sector Enterprise UX: A Dual-Architecture Dashboard for KNOC</h1>
+  <p class="hero-sub">Bridging the operational data gap between headquarters and 9 fragmented field offices into a unified control system.</p>
+  <div class="meta-grid">
+    <div class="meta-item">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">UX Research · IA · System Design · Prototyping</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Team</div>
+      <div class="meta-value">1 PM · 2 Consultants · 1 PL · 2 UX Designers · 4 Developers</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Timeline</div>
+      <div class="meta-value">3 months · Oct 2024</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Domain</div>
+      <div class="meta-value">Energy · Public Sector</div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO IMAGE -->
+<div class="hero-image">
+  <img src="images/knoc-dashboard (2).png" alt="KNOC Digital Transformation Dashboard — three-screen view showing HQ and branch dashboards" />
+</div>
+
+<!-- IMPACT -->
+<section>
+  <div class="section-eyebrow">Impact</div>
+  <h2>What this project delivered</h2>
+  <p>
+Due to organizational UX maturity and the mid-fidelity handoff structure, post-launch analytics were not actively tracked. Instead, the project success was measured by the scale of architectural standardization and the creation of a future-proof framework for organizational efficiency.</p>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-num">9+1</div>
+      <div class="impact-label">Unified 9 fragmented branch workflows and HQ control requirements into one cohesive ecosystem through deep qualitative research with 25 key stakeholders over 4 weeks.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">100%</div>
+      <div class="impact-label">Standardized the information architecture and data attributes across all 10 core safety domains, replacing manual ad-hoc reporting with role-specific, automated visualizations.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">50%+</div>
+      <div class="impact-label">Of branch users validated the personalized dashboard feature designed in response to concept testing findings</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section>
+  <div class="section-eyebrow">The Problem</div>
+  <h2>Same data. Two completely different realities.</h2>
+  <p>KNOC's legacy ESH (Environment, Safety & Health) system was being replaced as part of a Digital Transformation initiative. On paper, the problem was clear: the old system was inefficient. In practice, the problem turned out to be more specific.</p>
+
+  <div class="two-col">
+    <div class="col-block">
+      <h4>Headquarters</h4>
+      <ul>
+        <li>Couldn't verify data accuracy from branches</li>
+        <li>No standardized input formats meant data was unreliable</li>
+        <li>Unable to detect process errors in real time</li>
+        <li>Data entry and extraction felt wasteful</li>
+      </ul>
+    </div>
+    <div class="col-block">
+      <h4>9 Branch Offices</h4>
+      <ul>
+        <li>Worked directly with raw, unprocessed data</li>
+        <li>No clear data entry standards — reports were subjective</li>
+        <li>Repeatedly rebuilding the same field reports manually</li>
+        <li>Reports from different authors created communication gaps</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight-block" style="margin-top: 32px;">
+    <p><strong>The insight that changed the brief:</strong> Initial interviews surfaced generic DT complaints. But through Affinity Diagram analysis, a structural pattern emerged — HQ and branches weren't just using the same system differently. They needed fundamentally different things from it. That reframe drove every design decision after.</p>
+  </div>
+</section>
+
+<!-- HOW I DECIDED -->
+<section>
+  <div class="section-eyebrow">Research & Key Decisions</div>
+  <h2>How I decided what to build</h2>
+
+ <div class="process-steps">
+    
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>4 weeks of targeted interviews — not generic discovery</h3>
+        <p>Weekly Zoom sessions with 25 participants: 20 users from 9 branch offices, 5 from headquarters. Sessions were structured to surface real workflow friction, not wish lists. Photos from on-site sessions at branch offices provided context that remote interviews couldn't.</p>
+        <p>The initial findings were common DT complaints — not particularly useful on their own.</p>
+        
+        <div class="research-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 16px 0; width: 100%; box-sizing: border-box;">
+          <div style="width: 100%;">
+            <img src="images/week1.png" alt="Week 1 Research" style="display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          </div>
+          <div style="width: 100%;">
+            <img src="images/week2.png" alt="Week 2 Research" style="display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          </div>
+          <div style="width: 100%;">
+            <img src="images/week3.png" alt="Week 3 Research" style="display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          </div>
+          <div style="width: 100%;">
+            <img src="images/week4.png" alt="Week 4 Research" style="display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          </div>
+        </div>
+        <p style="font-size: 13px; color: #666; margin-top: -4px; text-align: left;">4 weeks of targeted user interview sessions</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Affinity Diagram: redefining who the users actually were</h3>
+        <p>Running an Affinity Diagram on the raw interview data produced an unexpected result. When treated as one user group, the data was noisy. When separated into HQ and branch perspectives, two distinct problem spaces emerged with different root causes and different success criteria.</p>
+        <p>This led to a deliberate decision: build one product with two modes, not one product trying to serve everyone the same way.</p>
+        
+        <div style="margin: 16px auto; text-align: center; max-width: 400px;">
+          <img src="images/affinity-diagram.png" alt="Affinity Diagram Analysis" style="width: 100%; max-width: 400px; height: auto; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: center;">Affinity diagram user group synthesis</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Competitive audit before wireframing</h3>
+        <p>Before designing anything, I audited dashboard patterns from competitors in centralized control systems. The goal was to understand what made enterprise dashboards scannable under real work conditions — not just aesthetically clean.</p>
+        <p>Key finding: information hierarchy mattered more than information density. Users found it easier to process data when the most critical indicator was centered, not buried.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; width: 100%;">
+          <img src="images/concept-testing-a.png" alt="Competitive Audit A" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <img src="images/concept-testing-b.png" alt="Competitive Audit B" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+        </div>
+        <p style="font-size: 13px; color: #666; margin-top: -4px; text-align: left;">Dashboard pattern and scanning hierarchy analysis</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Defining the right data attributes for 10 menus</h3>
+        <p>For the branch dashboard, the challenge wasn't visualization style — it was deciding what to visualize. Each of the 10 safety management menus had different operational logic. I analyzed the core attributes of each menu to determine which data points were genuinely actionable vs. informational.</p>
+        <div class="insight-block">
+          <p>Example: "Contractor Management" needed a purchase count. "Risk Index Overview" needed risk scores plus conditions. The graph type followed from the data type — not the other way around.</p>
+          
+          <div style="margin: 16px 0; text-align: left;">
+            <img src="images/graph-data-metrics.jpg" alt="Graph Data Metrics Analysis" style="width: 100%; max-width: 500px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+            <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: left;">Data attribute matching and graph mapping matrix</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>Concept testing with all 9 branches</h3>
+        <p>The most significant finding from branch concept testing: graph effectiveness varied sharply by task relevance. The same visualization that worked well for one team's workflow was irrelevant for another's. This validated the need for personalized, task-specific dashboard configurations — not a one-size-fits-all layout.</p>
+        
+        <div style="margin: 16px auto; text-align: center; max-width: 400px;">
+          <img src="images/concept-testing.jpg" alt="Concept Testing" style="width: 100%; max-width: 400px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1.5px solid var(--green-accent);">
+          <p style="font-size: 13px; color: #666; margin-top: 6px; text-align: center;">Remote branch validation and layout feedback</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section>
+  <div class="section-eyebrow">Solution</div>
+  <h2>One dashboard, two distinct modes</h2>
+  <p>The solution was a dual-architecture dashboard: a centralized control view for headquarters and a personalized, task-oriented view for branch offices. The two modes shared the same underlying data but were structured around fundamentally different user goals.</p>
+
+  <div class="feature-block">
+    <div class="feature-tag">Feature 01 — Branch Offices</div>
+    <h3>Personalized data visualization across 10 management menus</h3>
+    <p>Each of the 10 safety management menus was given a dedicated visualization built around its core attributes. Branch users could remove low-priority dashboard cards and navigate directly to relevant task boards via a "+more" button — reducing the cognitive load of monitoring 10 different domains at once.</p>
+    <p>More than half of users in concept testing validated the need for dashboard features customized to their specific team's main tasks.</p>
+  </div>
+
+  <div class="feature-block">
+    <div class="feature-tag">Feature 02 — Headquarters</div>
+    <h3>Validating Layout Efficiency via F-Shaped Scanning Pattern</h3>
+    <p>Initially, I considered a layout with the large map on the left (Left-Aligned Ver.) to maximize visual stability and aesthetics. However, given the nature of a headquarters control system where data-scanning speed directly impacts operational outcomes, I determined that a more objective, hypothesis-driven validation was required.</P>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; width: 100%; padding: 0 26px; box-sizing: border-box;">
+          <img src="images/concept-testing-a.png" alt="Competitive Audit A" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+          <img src="images/concept-testing-b.png" alt="Competitive Audit B" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid #e0e0e0;">
+        </div>
+        <p style="font-size: 13px; color: #666; margin-top: -4px; text-align: left; padding: 0 26px; box-sizing: border-box;">Dashboard pattern and scanning hierarchy analysis</p>
+
+    <P>To achieve this, I formulated a hypothesis based on the Western user’s standard F-shaped scanning pattern to test two distinct layout variables. Assuming that operators first perceive critical risk metrics at the absolute top-left of the screen, I designed a layout experiment to compare:</P>
+  <p>1. Whether it was faster for their gaze to scan horizontally into dense textual lists pushed to the right.</p>  
+  <p>2. Or whether it was more efficient to fluidly connect their gaze with a center-aligned map overview, allowing them to organically locate which specific branch had an anomaly.</P>
+
+  <p>Through our remote concept testing sessions, the validation proved that anchoring the critical status cards at the initial left-hand focal point and expanding the monitoring map in the center significantly reduced cognitive friction and optimized the control room's scanning workflow. Consequently, this center-aligned structure was selected as the final operational layout.</P>
+  <p>The map-based overview gave headquarters real-time status visibility across the organization, with drill-down access to individual branch data.</p>
+  </div>
+
+  <div style="margin: 40px auto 0; text-align: center; width: 100%; max-width: 900px;">
+    <img src="images/dashboard-high-fi-dark.png" alt="dual-dashboard-high-fi" style="width: 100%; display: block; border-radius: 8px; border: 1px solid var(--rule); margin: 0 auto;">
+    <p style="font-size: 13px; color: var(--ink-muted); margin-top: 12px; text-align: center;">Final high-fidelity dashboard output</p>
+  </div>
+
+</section>
+  
+
+<!-- REFLECTION -->
+<section>
+  <div class="section-eyebrow">Reflection</div>
+  <h2>What I learned, and what I'd change</h2>
+
+  <div class="reflection-grid">
+    <div class="reflection-card learned">
+      <div class="r-label">What this project taught me</div>
+      <p>The most important design decision wasn't visual — it was the choice to split one user group into two. That reframing happened during research analysis, not during design, which reinforced how much the quality of synthesis matters in enterprise UX. When the problem space is complex, the framing of the problem is the design work.</p>
+    </div>
+    <div class="reflection-card different">
+      <div class="r-label">What I'd do differently</div>
+      <p>The project ended at mid-fidelity. I'd push to establish clearer success metrics before development — specifically, task completion rates by branch type and HQ data verification time — so post-launch performance could be measured against the original problem statement, not just stakeholder satisfaction.</p>
+    </div>
+  </div>
+
+  <div class="insight-block" style="margin-top: 32px;">
+    <p><strong>Next step identified:</strong> Onboarding service design for KNOC employees adapting to the new system — addressing the change management side of DT that pure dashboard design doesn't solve.</p>
+  </div>
+</section>
+
+<!-- FOOTER NAV -->
+<div class="case-footer">
+  <a href="lms.html">← ReaingOcean LMS </a>
+  <a href="hanwha-health.html">Next: Hanwha Health Benefit ERP →</a>
+</div>
+
+</body>
+</html>
