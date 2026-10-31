@@ -1,0 +1,200 @@
+/* ==========================================================================
+   site.css — Framer version changes, layered over styles.css
+   ========================================================================== */
+
+/* Nav */
+.nav { padding: 16px 32px; }
+.nav__logo { font-size: 22.4px; }
+.nav__links a { font-size: 12.8px; letter-spacing: .2em; transition: opacity .25s ease; }
+.nav__links a::after { display: none; }
+.nav__links a:hover { opacity: .6; }
+.nav a:focus, .nav a:focus-visible { outline: none; }
+
+/* Hero — rings stay still, bead swings on them */
+.hero { padding: 128px 32px 64px; }
+.hero__circle--1, .hero__circle--2 { animation: none; }
+.hero__circle--2 { top: 85px; right: 95px; }
+.hero__name { font-size: clamp(3.5rem, 10vw, 120px); }
+.hero__tagline { font-size: 14.4px; max-width: 320px; }
+.hero__cta {
+  padding: 15.4px 41px;
+  transition: background-color .5s ease, transform .5s ease;
+}
+.hero__cta:hover {
+  background-color: rgba(201, 168, 76, .18);
+  color: var(--cream);
+  transform: translateY(-3px);
+}
+.hero__scroll { right: 3px; bottom: 77px; }
+
+.orbit {
+  position: absolute; inset: 0;
+  will-change: transform;
+}
+.bead {
+  position: absolute; left: 50%; top: 0;
+  width: 4px; height: 4px; margin: -1.5px 0 0 -2px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff 0%, #fff0c8 30%, #e2be60 65%, #a07a26 100%);
+  box-shadow: 0 0 2px rgba(255,255,255,.9), 0 0 8px 1px rgba(255,220,140,.75), 0 0 16px 2px rgba(201,168,76,.35);
+}
+
+/* Scroll reveal */
+.reveal, .reveal-card {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1);
+}
+.reveal-card { transform: translateY(56px) scale(.98); transition-delay: .1s; }
+.reveal.in, .reveal-card.in { opacity: 1; transform: none; }
+
+/* About */
+.about { max-width: 1200px; margin: 0 auto; gap: 128px; padding: 128px 32px; }
+.about__label { font-size: 12px; letter-spacing: .3em; }
+.about__heading { font-size: clamp(2rem, 5vw, 56px); }
+.about__text { font-size: 16.8px; line-height: 1.8; }
+.about__skill-tag { padding: 5.6px 16px; font-size: 12px; border: 1px solid #1a2f54; transition: background-color .25s ease; }
+.about__skill-tag:hover { background-color: #e8e0d0; }
+.about__image-wrap { aspect-ratio: .75; }
+.about__image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Projects */
+.projects { padding: 128px 32px; }
+.projects .container { max-width: 1200px; padding: 0 32px; }
+.projects__header { margin-bottom: 64px; }
+.projects__heading { font-size: clamp(2rem, 5vw, 56px); }
+.projects__count { font-size: 80px; }
+.project-card { aspect-ratio: auto; height: 471px; }
+.project-card button {
+  all: unset; display: block; position: relative;
+  width: 100%; height: 100%; cursor: pointer;
+}
+.project-card button:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+.project-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.project-card__inner,
+.project-card:hover .project-card__inner {
+  transform: none;
+  padding: 32px; gap: 8px;
+  background: linear-gradient(0deg, rgba(15,31,61,.95) 0%, transparent 60%);
+}
+.project-card__num { font-family: var(--font-display); font-size: 12px; color: var(--gold); letter-spacing: .2em; }
+.project-card__title { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: var(--cream); }
+.project-card__tag { font-family: var(--font-body); font-size: 11.2px; text-transform: uppercase; letter-spacing: .15em; color: var(--text-muted); }
+
+/* Contact */
+.contact { max-width: 700px; margin: 0 auto; padding: 128px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.contact__label { margin-bottom: 16px; }
+.contact__heading { font-size: clamp(2rem, 5vw, 56px); margin: 0; }
+.contact__heading em { font-style: normal; color: var(--gold); }
+
+.showme {
+  margin-top: 32px;
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 44px; padding: 0 22px 0 24px; border-radius: 22px;
+  background: var(--gold); color: var(--navy);
+  font-family: var(--font-body); font-size: 12px; font-weight: 500;
+  letter-spacing: .24em; text-transform: uppercase;
+  transition: transform .45s cubic-bezier(.34, 1.9, .5, 1);
+}
+.showme:hover { transform: scale(1.1); }
+.showme:active { transform: scale(.94); transition-duration: .12s; }
+
+.contact .contact__text { margin: 48px 0 0; }
+
+/* Note form */
+.note { margin-top: 28px; width: 100%; max-width: 440px; text-align: left; }
+.note__box {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid #d8d0bf; border-radius: 16px; background: #f8f6f1;
+  padding: 6px 6px 6px 18px;
+}
+.note__field { position: relative; flex: 1; height: 40px; overflow: hidden; }
+.note__input {
+  position: absolute; inset: 0; width: 100%; height: 40px;
+  border: 0; outline: 0; background: transparent;
+  font: 15px var(--font-body); color: var(--navy);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), opacity .35s ease;
+}
+.note__input::placeholder { color: #8a8fa0; }
+.note__input.out { transform: translateY(-100%); opacity: 0; }
+.note__input.pre { transform: translateY(100%); opacity: 0; transition: none; }
+.note__send {
+  flex: none; width: 40px; height: 40px; border: 0; border-radius: 12px;
+  background: var(--navy); color: var(--cream); cursor: pointer;
+  display: grid; place-items: center;
+}
+.note__send svg { transition: transform .7s cubic-bezier(.5,0,.75,0), opacity .7s ease; }
+.note__send.fly svg { transform: translate(180px, -70px) rotate(-20deg); opacity: 0; }
+.note__hint { min-height: 20px; margin: 8px 0 0 18px; font-size: 13px; color: #8a8fa0; }
+.note__hint.err { color: #B42318; }
+.note__hint.ok { color: var(--gold); }
+
+.contact__links { margin-top: 20px; display: flex; gap: 36px; justify-content: center; }
+.contact__link {
+  position: relative; display: inline-block;
+  font-family: var(--font-body); font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
+  color: #8a9bbf; padding-bottom: 4px;
+  transition: opacity .35s ease, transform .35s ease;
+}
+.contact__link::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px;
+  background: currentColor; transition: width .35s ease;
+}
+.contact__link:hover { opacity: .7; transform: translateY(-2px); }
+.contact__link:hover::after { width: 100%; }
+
+/* Footer */
+.footer { padding: 32px 32px 48px; font-size: 12px; }
+
+/* Modal */
+body.modal-open { overflow: hidden; }
+.modal {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(15,31,61,.78);
+  opacity: 0; transition: opacity .25s ease;
+}
+.modal.show { opacity: 1; transition-duration: .3s; }
+.modal__scroller { position: absolute; inset: 0; height: 100vh; overflow: auto; overscroll-behavior: contain; }
+.modal__track { padding: 40px 0 96px; min-height: 100%; box-sizing: border-box; }
+.modal__sheet {
+  width: 92%; max-width: 1280px; margin: 0 auto;
+  border-radius: 6px; overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,.35);
+  transform: translateY(24px) scale(.96); opacity: 0;
+  transition: transform .45s cubic-bezier(.3,1.25,.5,1), opacity .3s ease;
+}
+.modal.show .modal__sheet { transform: none; opacity: 1; }
+.modal__foot { padding: 40px 32px 80px; display: flex; justify-content: center; }
+.modal__back {
+  background: transparent; border: 1px solid var(--navy); color: var(--navy);
+  padding: 14px 32px; cursor: pointer;
+  font: 11.9px var(--font-body); letter-spacing: .2em; text-transform: uppercase;
+  transition: transform .4s ease, background-color .4s ease;
+}
+.modal__back:hover { transform: translateY(-3px); background: #e8e0d0; }
+.modal__close {
+  position: fixed; top: 24px; right: 28px; z-index: 2;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--cream); color: var(--navy); cursor: pointer;
+  border: 1px solid rgba(15,31,61,.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,.18);
+  display: grid; place-items: center;
+  transition: transform .4s ease, background-color .4s ease;
+}
+.modal__close:hover { transform: rotate(90deg); background: #e8e0d0; }
+
+@media (max-width: 900px) {
+  .about { gap: 64px; }
+  .project-card { height: 420px; }
+}
+@media (max-width: 600px) {
+  .hero__circle--2 { right: 20px; }
+  .projects .container { padding: 0; }
+  .modal__sheet { width: 100%; border-radius: 0; }
+  .modal__track { padding-top: 0; }
+  .modal__close { top: 12px; right: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-card { opacity: 1; transform: none; transition: none; }
+}

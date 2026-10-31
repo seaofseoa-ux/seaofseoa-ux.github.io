@@ -5,28 +5,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Seojin — Portfolio</title>
+  <meta name="description" content="Seojin — Product Designer and UX Specialist. Clear experiences for complex products, workflows, and information systems." />
 
-  <!-- Google Fonts -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Newsreader:opsz,wght@6..72,500&display=swap" rel="stylesheet" />
 
-  <!-- CSS Normalize — must come BEFORE styles.css -->
   <link rel="stylesheet" href="css/normalize.css" />
-
-  <!-- Main Stylesheet — last link in <head> -->
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/site.css" />
 </head>
 
 <body>
- 
-  <!-- =====================================================================
-       Navigation
-       ===================================================================== -->
+
+  <!-- Navigation -->
   <nav class="nav" aria-label="Main navigation">
     <a href="#hero" class="nav__logo">S.</a>
-    
     <ul class="nav__links">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Work</a></li>
@@ -34,60 +30,49 @@
     </ul>
   </nav>
 
-
-  <!-- =====================================================================
-       SECTION 1 — Hero
-       ===================================================================== -->
+  <!-- SECTION 1 — Hero -->
   <section class="hero" id="hero">
-
-    <!-- Decorative background geometry -->
     <div class="hero__bg" aria-hidden="true">
-      <div class="hero__circle hero__circle--1"></div>
-      <div class="hero__circle hero__circle--2"></div>
+      <div class="hero__circle hero__circle--1"><div class="orbit" data-dir="1" data-delay="0"><i class="bead"></i></div></div>
+      <div class="hero__circle hero__circle--2"><div class="orbit" data-dir="-1" data-delay="0.6"><i class="bead"></i></div></div>
     </div>
 
     <div class="hero__content">
       <p class="hero__eyebrow"><b>Product Designer</b> | UX Specialist</p>
-
       <h1 class="hero__name">
         Seojin
         <span>Portfolio.</span>
       </h1>
-
       <p class="hero__tagline">
         I design clear experiences for complex products, workflows, and information systems.
       </p>
-
       <a href="#projects" class="hero__cta">View My Work</a>
     </div>
 
     <p class="hero__scroll" aria-hidden="true">Scroll ↓</p>
   </section>
 
-
-  <!-- =====================================================================
-       SECTION 2 — About Me
-       ===================================================================== -->
+  <!-- SECTION 2 — About Me -->
   <section class="about" id="about">
-
-    <!-- Text column -->
     <div class="about__text-col">
       <p class="about__label">About Me</p>
-      <h2 class="about__heading">Hello, I'm Seojin</h2>
-      <p class="about__text">
-        I'm a Product Designer specializing in complex systems and enterprise products.
-        I turn complex requirements, workflows, and information into clear, intuitive and interactive digital experiences.
-        My work spans information architecture, UX research, systems thinking, and workflow design
-        across B2B environments.
-        
-        I'm studying Interactive Design and UX Design at Algonquin College.
-      </p>
-      <p class="about__text">
-        When I'm not designing, you'll find me on the tennis court,
-        hunting for the perfect café, or pondering human behaviour and cognition.
-      </p>
+      <h2 class="about__heading reveal">Hello, I'm Seojin</h2>
+      <div class="reveal">
+        <p class="about__text">
+          I'm a Product Designer specializing in complex systems and enterprise products.
+          I turn complex requirements, workflows, and information into clear, intuitive and interactive digital experiences.
+          My work spans information architecture, UX research, systems thinking, and workflow design
+          across B2B environments.
 
-      <ul class="about__skills" aria-label="Skills">
+          I'm studying Interactive Design and UX Design at Algonquin College.
+        </p>
+        <p class="about__text">
+          When I'm not designing, you'll find me on the tennis court,
+          hunting for the perfect café, or pondering human behaviour and cognition.
+        </p>
+      </div>
+
+      <ul class="about__skills reveal" aria-label="Skills">
         <li class="about__skill-tag">UX Design</li>
         <li class="about__skill-tag">Information Architecture</li>
         <li class="about__skill-tag">Human-AI Interaction</li>
@@ -95,120 +80,131 @@
         <li class="about__skill-tag">Systems Thinking</li>
         <li class="about__skill-tag">Accessibility & Inclusive Design</li>
         <li class="about__skill-tag">Persona & Tone Design</li>
-                
         <li class="about__skill-tag">HTML5</li>
         <li class="about__skill-tag">CSS3</li>
         <li class="about__skill-tag">JavaScript</li>
       </ul>
     </div>
 
-    <!-- Image / placeholder column -->
-    <div class="about__image-wrap">
-      <img src="images/about.JPG" alt="profile">
-      <div class="about__placeholder" aria-hidden="true">K</div>
+    <div class="about__image-wrap reveal">
+      <img src="images/about.JPG" alt="Portrait of Seojin">
     </div>
-
   </section>
 
-
-  <!-- =====================================================================
-       SECTION 3 — Projects / Works
-       ===================================================================== -->
+  <!-- SECTION 3 — Projects -->
   <section class="projects" id="projects">
     <div class="container">
-
       <div class="projects__header">
         <div>
           <p class="projects__label">Selected Work</p>
           <h2 class="projects__heading">Projects.</h2>
         </div>
-        <span class="projects__count" aria-hidden="true">03</span>
+        <span class="projects__count" aria-hidden="true">04</span>
       </div>
 
       <ul class="projects__grid" aria-label="Project list">
-
-        <!-- Project 01 -->
-        <li class="project-card project-card--1">
-          <img src="images/reading-main-output.png" alt="brand-identtity-projt">
-          <a href="lms.html">
-          <div class="project-card__inner">
-            <span class="project-card__num">01</span>
-            <h3 class="project-card__title">LMS Redesign</h3>
-            <span class="project-card__tag">B2B · Workflow · UX Research </span>
-          </div>
-          </a>
+        <li class="project-card reveal-card">
+          <button type="button" data-case="reading" data-sheet="#F6F3FB" aria-label="Open case study: LMS Redesign">
+            <img src="images/reading-main-output.png" alt="">
+            <div class="project-card__inner">
+              <span class="project-card__num">01</span>
+              <h3 class="project-card__title">LMS Redesign</h3>
+              <span class="project-card__tag">B2B · Workflow · UX Research</span>
+            </div>
+          </button>
         </li>
-
-        <!-- Project 02 -->
-        <li class="project-card project-card--2">
-          <img src="images/knoc-dashboard (2).png" alt="responsive-web-projt">
-          <a href="knoc-dashboard-v2.html">
-          <div class="project-card__inner">
-            <span class="project-card__num">02</span>
-            <h3 class="project-card__title">Public Sector Dashboard</h3>
-            <span class="project-card__tag">Data Visualization · Multi-system Workflow · Enterprise UX</span>
-          </div>
-        </a>
+        <li class="project-card reveal-card">
+          <button type="button" data-case="knoc" data-sheet="#F2F7F3" aria-label="Open case study: Public Sector Dashboard">
+            <img src="images/knoc-dashboard (2).png" alt="">
+            <div class="project-card__inner">
+              <span class="project-card__num">02</span>
+              <h3 class="project-card__title">Public Sector Dashboard</h3>
+              <span class="project-card__tag">Data Visualization · Multi-system Workflow · Enterprise UX</span>
+            </div>
+          </button>
         </li>
-
-         <!-- Project 03 -->
-        <li class="project-card project-card--3">
-          <img src="images/hanwha-health-hero.png" alt="hanwha-health-benefit-erp-prjt">
-          <a href="hanwha-health.html">
-          <div class="project-card__inner">
-            <span class="project-card__num">03</span>
-            <h3 class="project-card__title">Health benefit ERP</h3>
-            <span class="project-card__tag">IA · Complex Workflow · Reverse Engineering</span>
-          </div>
-          </a>
+        <li class="project-card reveal-card">
+          <button type="button" data-case="health" data-sheet="#F0F7F8" aria-label="Open case study: Health Benefit ERP">
+            <img src="images/hanwha-health-hero.png" alt="">
+            <div class="project-card__inner">
+              <span class="project-card__num">03</span>
+              <h3 class="project-card__title">Health Benefit ERP</h3>
+              <span class="project-card__tag">IA · Complex Workflow · Reverse Engineering</span>
+            </div>
+          </button>
         </li>
-        
-        <!-- Project 04 -->
-        <li class="project-card project-card--4">
-          <a href="hanwha-chemical.html">
-          <img src="images/hanwha-solution.png" alt="hanwha-chmcal-supply-erp-prjt">
-           <div class="project-card__inner">
-            <span class="project-card__num">04</span>
-            <h3 class="project-card__title">Chemical Supply Mngt. ERP</h3>
-            <span class="project-card__tag">IA · System Design · ERD data mapping </span>
-          </div>
-          </a>
+        <li class="project-card reveal-card">
+          <button type="button" data-case="hanwha" data-sheet="#FBF4EE" aria-label="Open case study: Chemical Supply Mngt. ERP">
+            <img src="images/hanwha-solution.png" alt="">
+            <div class="project-card__inner">
+              <span class="project-card__num">04</span>
+              <h3 class="project-card__title">Chemical Supply Mngt. ERP</h3>
+              <span class="project-card__tag">IA · System Design · ERD Data Mapping</span>
+            </div>
+          </button>
         </li>
-
       </ul>
     </div>
   </section>
 
-
-  <!-- =====================================================================
-       SECTION 4 — Contact
-       ===================================================================== -->
+  <!-- SECTION 4 — Contact -->
   <section class="contact" id="contact">
     <p class="contact__label">Get In Touch</p>
-    <h2 class="contact__heading">Want to see more of my AI Work?</h2>
+    <h2 class="contact__heading">Want to see more<br>of my <em>AI work</em>?</h2>
+
+    <a class="showme" href="https://seojin-constellation-2.netlify.app/" target="_blank" rel="noopener">
+      Show me
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+
     <p class="contact__text">
       Have a project in mind or just want to say hi?<br />
       My inbox is always open.
     </p>
 
-    <a href="mailto:gee9.ms@gmail.com" class="contact__email">
-      gee9.ms@gmail.com
-    </a>
+    <form class="note" id="note" novalidate>
+      <div class="note__box">
+        <div class="note__field">
+          <input class="note__input" id="noteInput" type="text" placeholder="Leave me a note…" autocomplete="off" aria-label="Your note">
+        </div>
+        <button class="note__send" type="submit" aria-label="Send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 21.7a.5.5 0 0 0 .9 0L22 3.5a.5.5 0 0 0-.6-.6L3.3 9.6a.5.5 0 0 0 0 .9l7.6 3.1a2 2 0 0 1 1.1 1.1z"/><path d="m21.9 2.1-10.9 11"/></svg>
+        </button>
+      </div>
+      <p class="note__hint" id="noteHint" aria-live="polite"></p>
+    </form>
 
-    <ul class="contact__socials" aria-label="Social links">
-      <li><a href="#" class="contact__social-link"></a></li>
-      <li><a href="https://linkedin.com/in/seojin10" class="contact__social-link" target="_blank" rel="noopenner noreferrer">LinkedIn</a></li>
-      <li><a href="#" class="contact__social-link"></a></li>
+    <ul class="contact__links" aria-label="Contact links">
+      <li><a class="contact__link" href="https://linkedin.com/in/seojin10" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li><a class="contact__link" id="emailLink" href="mailto:gee9.ms@gmail.com">Email</a></li>
     </ul>
   </section>
 
-
-  <!-- =====================================================================
-       Footer
-       ===================================================================== -->
   <footer class="footer">
     <p>&copy; 2026 Seojin — Designed &amp; Built with care. · v1.0</p>
   </footer>
 
+  <!-- Case study modal -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__scroller" id="modalScroller">
+      <div class="modal__track" id="modalTrack">
+        <div class="modal__sheet" id="modalSheet">
+          <div class="cs site" id="csHost">
+            <nav class="cs-prog" id="csProg" aria-label="Case study progress" hidden></nav>
+            <article class="cs-doc" id="csDoc"></article>
+          </div>
+          <div class="modal__foot">
+            <button type="button" class="modal__back" id="modalBack">Back to projects</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="modal__close" id="modalClose" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+
+  <script src="js/case-study.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
