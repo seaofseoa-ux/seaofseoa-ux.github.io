@@ -46,6 +46,17 @@
   }
   </script>
 
+  <!-- Owner opt-out: visit /?notrack once to stop counting your own visits on that browser; /?track to undo -->
+  <script>
+    (function () {
+      try {
+        var q = location.search;
+        if (/[?&]notrack\b/.test(q)) localStorage.setItem("ga_optout", "1");
+        if (/[?&]track\b/.test(q)) localStorage.removeItem("ga_optout");
+        if (localStorage.getItem("ga_optout") === "1") window["ga-disable-G-K5HSEE2TSD"] = true;
+      } catch (e) {}
+    })();
+  </script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-K5HSEE2TSD"></script>
   <script>
