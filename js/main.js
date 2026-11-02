@@ -4,6 +4,12 @@
   var EMAIL = "gee9.ms@gmail.com";
   var FORM_ENDPOINT = "https://formspree.io/f/mnppgdjr";
 
+  /* ---------- GA4 events ---------- */
+  function track(name, params) {
+    try { if (typeof window.gtag === "function") window.gtag("event", name, params || {}); } catch (e) {}
+  }
+  var CASE_NAMES = { reading: "lms", knoc: "dashboard", health: "health_erp", hanwha: "chemical_erp" };
+
   /* ---------- Orbit beads: pendulum drop from the top of each ring ---------- */
   function Orbit(el) {
     var d = Number(el.dataset.dir || 1), delay = Number(el.dataset.delay || 0) * 1000;
@@ -87,7 +93,10 @@
     }, 250);
   }
   document.querySelectorAll("[data-case]").forEach(function (b) {
-    b.addEventListener("click", function () { openModal(b.dataset.case, b.dataset.sheet); });
+    b.addEventListener("click", function () {
+      track("case_open_" + (CASE_NAMES[b.dataset.case] || b.dataset.case));
+      openModal(b.dataset.case, b.dataset.sheet);
+    });
   });
   document.getElementById("modalClose").addEventListener("click", closeModal);
   document.getElementById("modalBack").addEventListener("click", closeModal);
@@ -139,6 +148,7 @@
         input.classList.add("out");
         input.disabled = true; send.disabled = true;
         say("Sent. Talk soon.", "ok");
+        track("note_sent");
       }).catch(function () {
         say("Couldn't send. Try again.", "err");
       }).then(function () { busy = false; });
@@ -146,8 +156,14 @@
   });
 
   /* ---------- Email link: mail app, Gmail compose as fallback ---------- */
+  var showme = document.querySelector(".showme");
+  if (showme) showme.addEventListener("click", function () { track("click_show_me_ai_work"); });
+  var li = document.querySelector('.contact__link[href*="linkedin"]');
+  if (li) li.addEventListener("click", function () { track("click_linkedin"); });
+
   document.getElementById("emailLink").addEventListener("click", function (e) {
     e.preventDefault();
+    track("click_email");
     var left = false;
     function mark() { left = true; }
     window.addEventListener("blur", mark, { once: true });
